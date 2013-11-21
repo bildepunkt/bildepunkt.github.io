@@ -1,0 +1,34 @@
+body {
+	margin: 0;
+	font-family: sans-serif;
+	background-color: black;
+}
+
+.wrapper {
+	width: 400px;
+	margin: 0 auto;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	-ms-perspective: 600px;
+	-o-perspective: 600px;
+	perspective: 600px;
+}
+
+.stars {
+	position: fixed;
+}
+.star {
+	position: absolute;
+}
+
+.logo {
+	position: relative;
+	width: 400px;
+	height: 400px;
+	background-image: url('../img/cp.png');
+	display: none;
+}
+
+.content {
+	position: relative;
+}
