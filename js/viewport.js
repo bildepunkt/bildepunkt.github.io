@@ -2,26 +2,31 @@
  * viewport
  */
 
-;(function() {
+;(function(window, document) {
+
+var $win = $(window),
+	$doc = $(document),
+	buffer = 350,
+	observable,
+	timer;
 
 $.namespace('cp.viewport', {
 
-	$doc : null,
+	winWidth  : null,
+	winHeight : null,
 	docWidth  : null,
 	docHeight : null,
-	timer  : null,
-	buffer : 350,
-	buffering : false,
-	observable : null,
 	$observable : null,
 
 	init : function() {
-		this.$doc = $(document);
-		this.docHeight = this.$doc.height();
-		this.docWidth = this.$doc.width();
+		$doc = $(document);
+		this.docHeight = $doc.height();
+		this.docWidth = $doc.width();
+		this.winHeight = $win.height();
+		this.winWidth = $win.width();
 
-		this.observable = new cp.Observable();
-		this.$observable = this.observable.create('viewport');
+		observable = new cp.Observable();
+		this.$observable = observable.create('viewport');
 
 		this.events();
 	},
@@ -30,17 +35,19 @@ $.namespace('cp.viewport', {
 		var self = this;
 
 		$(window).resize(function() {
-			self.$observable.trigger('resizestart');
+			self.$observable.trigger('resizestart', self);
 
-			clearTimeout(self.timer);
-			self.timer = setTimeout(function() {
-				self.docHeight = self.$doc.height();
-				self.docWidth = self.$doc.width();
-				self.$observable.trigger('resizefinish');
-			}, self.buffer);
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				self.docHeight = $doc.height();
+				self.docWidth = $doc.width();
+				self.winHeight = $win.height();
+				self.winWidth = $win.width();
+				self.$observable.trigger('resizefinish', self);
+			}, buffer);
 		});
 	}
 
 });
 
-}());
+}(window, document));

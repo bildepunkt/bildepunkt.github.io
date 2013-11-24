@@ -36,7 +36,7 @@ $.namespace('cp.logo', {
 
 	setTop : function() {
 		this.$container
-			.css('margin-top', ((cp.viewport.docHeight / 2) - (this.height / 2)) + 'px');
+			.css('margin-top', ((cp.viewport.winHeight / 2) - (this.height / 2)) + 'px');
 	},
 
 	rotate : function(e) {

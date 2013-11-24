@@ -29,7 +29,10 @@ body {
 
 .content {
 	position: relative;
+}
+
+.launch {
 	font-family: sans-serif;
-	color: white;
+	color: #aaa;
 	text-align: center;
 }
