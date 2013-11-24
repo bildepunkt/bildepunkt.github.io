@@ -1,0 +1,11 @@
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?cp-graphics.com/.*$ [NC]
+RewriteRule \.(jpg|png|gif|js|css)$ - [F]
+
+Options -Indexes
