@@ -1,11 +1,20 @@
 body {
 	margin: 0;
-	font-family: sans-serif;
 	background-color: black;
 }
 
-.wrapper {
+.stars {
+	position: fixed;
+	top: 0;
+}
+.star {
+	position: absolute;
+}
+
+.logo-container {
+	position: relative;
 	width: 400px;
+	height: 400px;
 	margin: 0 auto;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
@@ -14,21 +23,13 @@ body {
 	perspective: 600px;
 }
 
-.stars {
-	position: fixed;
-}
-.star {
-	position: absolute;
-}
-
 .logo {
-	position: relative;
-	width: 400px;
-	height: 400px;
-	background-image: url('../img/cp.png');
 	display: none;
 }
 
 .content {
 	position: relative;
+	font-family: sans-serif;
+	color: white;
+	text-align: center;
 }

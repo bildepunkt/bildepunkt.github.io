@@ -6,11 +6,14 @@
 
 $.namespace('cp.logo', {
 
-	$el  : null,
+	$el : null,
+	$container : null,
 	height : null,
 
 	init : function($el) {
 		this.$el = $el;
+		this.$container = this.$el.parent();
+
 		this.height = this.$el.height();
 
 		this.setTop();
@@ -22,7 +25,7 @@ $.namespace('cp.logo', {
 	events : function() {
 		var self = this;
 
-		$(window).resize(function() {
+		cp.viewport.$observable.on('resizefinish', function() {
 			self.setTop();
 		});
 
@@ -32,7 +35,8 @@ $.namespace('cp.logo', {
 	},
 
 	setTop : function() {
-		this.$el.css('top', ((cp.viewport.docHeight / 2) - (this.height / 2)) + 'px');
+		this.$container
+			.css('margin-top', ((cp.viewport.docHeight / 2) - (this.height / 2)) + 'px');
 	},
 
 	rotate : function(e) {
