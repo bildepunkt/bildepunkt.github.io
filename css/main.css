@@ -32,7 +32,7 @@ body {
 }
 
 .launch {
-	font-family: sans-serif;
+	font-family: consolas, 'courier new', sans-serif;
 	color: #aaa;
 	text-align: center;
 }
