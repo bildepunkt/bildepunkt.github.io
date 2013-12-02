@@ -7,7 +7,6 @@
 var $win = $(window),
 	$doc = $(document),
 	buffer = 350,
-	observable,
 	timer;
 
 $.namespace('cp.viewport', {
@@ -19,15 +18,14 @@ $.namespace('cp.viewport', {
 	$observable : null,
 
 	init : function() {
-		$doc = $(document);
 		this.docHeight = $doc.height();
-		this.docWidth = $doc.width();
+		this.docWidth  = $doc.width();
 		this.winHeight = $win.height();
-		this.winWidth = $win.width();
+		this.winWidth  = $win.width();
 
-		observable = new cp.Observable();
-		this.$observable = observable.create('viewport');
+		this.$observable = new cp.Observable('viewport');
 
+		this.resizeHandler();
 		this.events();
 	},
 
@@ -35,17 +33,22 @@ $.namespace('cp.viewport', {
 		var self = this;
 
 		$(window).resize(function() {
-			self.$observable.trigger('resizestart', self);
-
-			clearTimeout(timer);
-			timer = setTimeout(function() {
-				self.docHeight = $doc.height();
-				self.docWidth = $doc.width();
-				self.winHeight = $win.height();
-				self.winWidth = $win.width();
-				self.$observable.trigger('resizefinish', self);
-			}, buffer);
+			self.resizeHandler();
 		});
+	},
+
+	resizeHandler : function() {
+		var self = this;
+		this.$observable.trigger('resizestart', this);
+
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			self.docHeight = $doc.height();
+			self.docWidth  = $doc.width();
+			self.winHeight = $win.height();
+			self.winWidth  = $win.width();
+			self.$observable.trigger('resizefinish', self);
+		}, buffer);
 	}
 
 });

@@ -4,8 +4,10 @@
 
 ;(function() {
 
-var Observable = function() {
-	this.$el = null;
+var $el;
+
+var Observable = function(name, $parel) {
+	return this.create(name, $parel);
 };
 
 Observable.prototype.create = function(name, $parel) {
@@ -13,13 +15,13 @@ Observable.prototype.create = function(name, $parel) {
 		class : name + '-observable'
 	}).appendTo($parel ? $parel : 'body');
 
-	this.$el = $('.' + name + '-observable');
+	$el = $('.' + name + '-observable');
 
-	return this.$el;
+	return $el;
 };
 
 Observable.prototype.destory = function() {
-	this.$el.off().remove();
+	$el.off().remove();
 };
 
 $.namespace('cp.Observable', Observable);

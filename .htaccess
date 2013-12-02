@@ -4,8 +4,14 @@ deny from all
 </Files>
 
 RewriteEngine on
-RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http://(www\.)?cp-graphics.com/.*$ [NC]
-RewriteRule \.(jpg|png|gif|js|css)$ - [F]
+# comment out for client-side routing
+# RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?nthdimension.ca/.*$ [NC]
+
+# hotlinking ( comment out for local apache :S )
+# RewriteRule \.(jpg|png|gif|js|css)$ - [F]
+
+# client-side routing with pushstate
+RewriteRule ^([a-z]+)$ /#$1 [R=301,NC,NE,L]
 
 Options -Indexes
