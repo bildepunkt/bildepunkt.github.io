@@ -9,7 +9,7 @@ $.namespace('cp.router', {
 	$observable : null,
 
 	init : function() {
-		this.navigate(this.getPath());
+		this.navigate(document.location.hash);
 		this.$observable = new cp.Observable('router');
 
 		this.events();
@@ -27,16 +27,7 @@ $.namespace('cp.router', {
 		if (this.$observable) {
 			this.$observable.trigger('navigate', url);
 		}
-
-		History.pushState(null, url, url);
-		$('html body').animate({
-			scrollTop : $('#' + url).offset().top
-		});
-	},
-
-	getPath : function() {
-		var pathName = document.location.pathname.match(/[a-zA-Z]+/);
-		return pathName ? pathName[0] : 'home';
+		document.location.hash = url;
 	}
 
 });
