@@ -4,17 +4,18 @@
 
 ;(function() {
 
+var amount  = null,
+	sizeMax = 32,
+	src = 'img/star.png',
+	starClass = 'star';
+
 $.namespace('cp.stars', {
 
-	amount : null,
-	sizeMax : 32,
-	imgPath : 'img/star.png',
-	starClass : 'star',
-	$container : null,
+	$el : null,
 
-	init : function(amount, container) {
-		this.amount = amount;
-		this.$container = container;
+	init : function(factor, $el) {
+		amount = factor * cp.viewport.winWidth;
+		this.$el = $el;
 		this.render();
 
 		this.events();
@@ -24,7 +25,7 @@ $.namespace('cp.stars', {
 		var self = this;
 
 		cp.viewport.$observable.on('resizestart', function() {
-			self.$container.fadeOut();
+			self.$el.fadeOut();
 		});
 
 		cp.viewport.$observable.on('resizefinish', function() {
@@ -33,29 +34,31 @@ $.namespace('cp.stars', {
 	},
 
 	render : function() {
-		var xPos,
-			yPos,
+		var stars = '',
+			xPos, yPos,
 			size;
 
-		this.$container.html('');
+		this.$el.html(cp.templateManager.template('#starsTemplate', {
+			'stars' : stars
+		}));
 
-		for (var i = 0; i < this.amount; i += 1) {
-			xPos = Math.random() * cp.viewport.docWidth - this.sizeMax;
-			yPos = Math.random() * cp.viewport.docHeight - this.sizeMax;
-			size = Math.random() * this.sizeMax;
+		for (var i = 0; i < amount; i += 1) {
+			xPos = Math.random() * cp.viewport.winWidth - sizeMax;
+			yPos = Math.random() * cp.viewport.winHeight - sizeMax;
+			size = Math.random() * sizeMax;
 
-			$('<img>', {
-				'src'    : this.imgPath,
-				'width'  : size,
-				'height' : size,
-				'class'  : this.starClass
-			}).css({
-				'left' : xPos + 'px',
-				'top'  : yPos + 'px'
-			}).appendTo(this.$container);
+			stars += cp.templateManager.template('#starTemplate', {
+				'src' : src,
+				'size' : size,
+				'starClass' : starClass,
+				'xPos' : xPos,
+				'yPos' : yPos
+			});
 		}
 
-		this.$container.fadeIn();
+		this.$el.html(cp.templateManager.template('#starsTemplate', {
+			'stars' : stars
+		})).fadeIn();
 	}
 
 });

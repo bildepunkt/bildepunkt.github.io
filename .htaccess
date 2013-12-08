@@ -12,6 +12,6 @@ RewriteCond %{HTTP_REFERER} !^http://(www\.)?nthdimension.ca/.*$ [NC]
 RewriteRule \.(jpg|png|gif|js|css)$ - [F]
 
 # client-side routing with pushstate
-# RewriteRule ^([a-z]+)$ /#$1 [R=301,NC,NE,L]
+# RewriteRule ^(.+)$ /#$1 [R=301,NC,NE,L]
 
 Options -Indexes

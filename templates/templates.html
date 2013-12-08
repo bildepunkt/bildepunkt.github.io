@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>templates</title>
+</head>
+<body>
+	<!-- stars -->
+	<script id="starTemplate" type="text/template">
+		<img alt="" src="<%= src %>" width="<%= size %>" height="<%= size %>" 
+			class="<%= starClass %>" style="left:<%= xPos %>px; top:<%= yPos %>px;" />
+	</script>
+	<script id="starsTemplate" type="text/template">
+		<div class="stars"><%= stars %></div>
+	</script>
+	<!-- countdown -->
+	<script id="countdownTemplate" type="text/template">
+		<span class="launch">t - <%= days %> days until launch</span>
+	</script>
+</body>
+</html>

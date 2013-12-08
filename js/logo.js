@@ -4,17 +4,18 @@
 
 ;(function() {
 
+var height;
+
 $.namespace('cp.logo', {
 
 	$el : null,
 	$container : null,
-	height : null,
 
 	init : function($el) {
 		this.$el = $el;
 		this.$container = this.$el.parent();
 
-		this.height = this.$el.height();
+		height = this.$el.height();
 
 		this.setTop();
 		this.$el.fadeIn();
@@ -36,7 +37,7 @@ $.namespace('cp.logo', {
 
 	setTop : function() {
 		this.$container
-			.css('top', ((cp.viewport.winHeight / 2) - (this.height / 2)) + 'px');
+			.css('top', ((cp.viewport.winHeight / 2) - (height / 2)) + 'px');
 	},
 
 	rotate : function(e) {

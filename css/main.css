@@ -36,8 +36,20 @@ section {
 	position: relative;
 }
 
-.launch {
+.launch-container {
 	font-family: consolas, 'courier new', sans-serif;
 	color: #aaa;
 	text-align: center;
+}
+
+.launch {
+	display: inline-block;
+	background-color: black;
+}
+
+.templates {
+	position: absolute;
+	visibility: hidden;
+	width: 0;
+	height: 0;
 }
