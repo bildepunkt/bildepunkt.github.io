@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" type="text/css" href="css/main.css?v0.1">
+	<link rel="stylesheet" type="text/css" href="css/slideshow.css?v0.1">
 
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="icon" type="image/png" href="favicon.png">
@@ -23,15 +24,31 @@
 
 	<section id="home">
 		<div class="logo-container">
-			<img class="logo" src="img/cp.png" alt="logo" width="400" height="400">
+			<img class="logo" src="img/home/cp.png" alt="logo" width="400" height="400">
 			<div class="content launch-container"></div>
 		</div>
+		<div class="slideshow-container">
+			<ul class="display">
+				<li><img src="http://placekitten.com/640/480"></li>
+				<li><img src="http://placekitten.com/642/480"></li>
+				<li><img src="http://placekitten.com/644/480"></li>
+			</ul>
+			<ul clas="navigation">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</section>
+
+	<section id="portfolio">
+
 	</section>
 
 	<!-- js libs -->
 	<script type="text/javascript" src="js/lib/jquery-min.js?v0.1"></script>
 	<script type="text/javascript" src="js/lib/lodash-min.js"></script>
-	<script type="text/javascript" src="js/lib/google-analytics.js?v0.1"></script>
+	<script type="text/javascript" src="js/lib/backbone-min.js?v0.1"></script>
 	<script type="text/javascript" src="js/lib/namespace.js?v0.1"></script>
 	<!-- js -->
 	<script type="text/javascript" src="js/countdown.js?v0.1"></script>
@@ -42,5 +59,7 @@
 	<script type="text/javascript" src="js/templateManager.js?v0.1"></script>
 	<script type="text/javascript" src="js/stars.js?v0.1"></script>
 	<script type="text/javascript" src="js/viewport.js?v0.1"></script>
+	<!-- analytics -->
+	<script async type="text/javascript" src="js/lib/google-analytics.js?v0.1"></script>
 </body>
 </html>
