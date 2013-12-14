@@ -6,7 +6,7 @@ deny from all
 RewriteEngine on
 
 # hotlinking ( comment out for local apache :S )
-RewriteRule \.(jpg|png|gif|js|css)$ - [F]
+# RewriteRule \.(jpg|png|gif|js|css)$ - [F]
 
 # client-side routing with pushstate
 # RewriteRule ^(.+)$ /#$1 [R=301,NC,NE,L]
