@@ -4,9 +4,6 @@ deny from all
 </Files>
 
 RewriteEngine on
-# comment out for client-side routing
-RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http://(www\.)?nthdimension.ca/.*$ [NC]
 
 # hotlinking ( comment out for local apache :S )
 RewriteRule \.(jpg|png|gif|js|css)$ - [F]
