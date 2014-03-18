@@ -3,6 +3,16 @@ body {
 	background-color: black;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 800;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 .stars {
 	position: fixed;
 	top: 0;
@@ -36,8 +46,13 @@ section {
 	position: relative;
 }
 
+.content p {
+	background-color: black;
+	margin: 8px -64px;
+}
+
 .launch-container {
-	font-family: consolas, 'courier new', sans-serif;
+	font-family: 'Ubuntu Mono', consolas, sans-serif;
 	color: #aaa;
 	text-align: center;
 }

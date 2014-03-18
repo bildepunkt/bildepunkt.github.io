@@ -10,7 +10,7 @@ $(document).ready(function() {
 		cp.viewport.init();
 		cp.logo.init($('.logo'));
 		cp.stars.init(0.1, $('.stars-container'));
-		cp.countdown.init($('.launch-container'), 'March 20, 2014');
+		//cp.countdown.init($('.launch-container'), 'March 20, 2014');
 	});
 
 });
