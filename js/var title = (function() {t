@@ -1,0 +1,6 @@
+var title = (function() {
+    var el;
+    var init = function(id) {
+        el = document.getElementById(id);
+    }
+});

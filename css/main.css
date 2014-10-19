@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	background-color: black;
+	background-color: #333;
 }
 
 a {
@@ -13,58 +13,17 @@ a:hover {
 	text-decoration: underline;
 }
 
-.stars {
-	position: fixed;
-	top: 0;
-}
-.star {
+canvas {
 	position: absolute;
-}
-
-section {
-	position: relative;
 	top: 0;
+	left: 0;
 }
 
-.logo-container {
-	position: relative;
-	width: 400px;
-	height: 400px;
-	margin: 0 auto;
-	-webkit-perspective: 600px;
-	-moz-perspective: 600px;
-	-ms-perspective: 600px;
-	-o-perspective: 600px;
-	perspective: 600px;
-}
 
-.logo {
-	display: none;
-}
-
-.content {
-	position: relative;
-}
-
-.content p {
-	background-color: black;
-	margin: 8px -64px;
-}
-
-.launch-container {
-	font-family: 'Ubuntu Mono', consolas, sans-serif;
-	color: #aaa;
+.title {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 128px;
+	font-weight: 400;
+	color: #fff;
 	text-align: center;
-}
-
-.launch {
-	display: inline-block;
-	background-color: black;
-}
-
-.templates {
-	position: absolute;
-	visibility: hidden;
-	width: 0;
-	height: 0;
 }

@@ -2,53 +2,60 @@
 <!--[if lte IE 8]><html lang="en" class="ie"><![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="author" content="Chris Peters">
-	<meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, single page apps, and responsive design.">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Chris Peters">
+    <meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, single page apps, and responsive design.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="css/main.css?v0.1">
-	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" type="image/png" href="favicon.png">
-	<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-	<title>home&nbsp; &#966; &nbsp;chris peters</title>
+    <title>home&nbsp; &#966; &nbsp;chris peters</title>
 </head>
 <body>
-	<!-- content -->
-	<div class="stars-container"></div>
+    <canvas id="galaxy"></canvas>
+    <div id="title" class="title-container">
+        <h1 class="title">CHRIS PETERS</h1>
+    </div>
+    <script src="js/title.js"></script>
+    <script src="js/stars.js"></script>
+    <script src="js/fractal.js"></script>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('galaxy');
+            var context = canvas.getContext('2d');
+            var timeout;
 
-	<section id="home">
-		<div class="logo-container">
-			<img class="logo" src="img/cp.png" alt="logo" width="400" height="400">
-			<div class="content launch-container">
-				<p>proton free, hydrogen neutral, endothermic frontend development</p>
-				<p><a href="mailto:chris@nthdimension.ca">contact</a> | <a href="http://github.com/c-concat-p/">github</a></p>
-			</div>
-		</div>
-	</section>
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-	<section id="portfolio">
-	</section>
+            title.init('title');
+            stars.init({
+                canvasId: 'galaxy',
+                fieldCount: 3
+            });
+            fractal.init('galaxy');
 
-	<!-- js libs -->
-	<script type="text/javascript" src="js/lib/jquery-min.js?v0.1"></script>
-	<script type="text/javascript" src="js/lib/lodash-min.js"></script>
-	<script type="text/javascript" src="js/lib/namespace.js?v0.1"></script>
-	<!-- js -->
-	<script type="text/javascript" src="js/countdown.js?v0.1"></script>
-	<script type="text/javascript" src="js/logo.js?v0.1"></script>
-	<script type="text/javascript" src="js/main.js?v0.1"></script>
-	<script type="text/javascript" src="js/Observable.js?v0.1"></script>
-	<script type="text/javascript" src="js/router.js?v0.1"></script>
-	<script type="text/javascript" src="js/templateManager.js?v0.1"></script>
-	<script type="text/javascript" src="js/stars.js?v0.1"></script>
-	<script type="text/javascript" src="js/viewport.js?v0.1"></script>
-	<!-- analytics -->
-	<script async type="text/javascript" src="js/lib/google-analytics.js?v0.1"></script>
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                title.resize();
+                stars.resize();
+                fractal.resize();
+            }
+
+            window.addEventListener('resize', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(resize, 256);
+            }, false);
+        };
+    </script>
 </body>
 </html>
