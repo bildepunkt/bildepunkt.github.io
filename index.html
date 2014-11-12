@@ -11,51 +11,65 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-    <link rel="shortcut icon" href="favicon.ico">
+    <!-- <link rel="shortcut icon" href="favicon.ico"> -->
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <title>home&nbsp; &#966; &nbsp;chris peters</title>
+    <title>chris peters</title>
 </head>
 <body>
     <canvas id="galaxy"></canvas>
-    <div id="title" class="title-container">
-        <h1 class="title">CHRIS PETERS</h1>
-    </div>
+
+    <section>
+        <div id="title" class="title-container">
+            <img src="img/cp-logo-light.png">
+        </div>
+    </section>
+
+    <section>
+        <h1>asdfasdf</h1>
+    </section>
+
+    <script src="js/lib/jquery.min.js"></script>
     <script src="js/title.js"></script>
     <script src="js/stars.js"></script>
-    <script src="js/fractal.js"></script>
     <script>
-        window.onload = function() {
+    (function() {
+        window.addEventListener('load', init, false);
+
+        function init() {
             var canvas = document.getElementById('galaxy');
             var context = canvas.getContext('2d');
             var timeout;
 
+            window.removeEventListener('load', init, false);
+
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            title.init('title');
+            title.init('title', true);
             stars.init({
                 canvasId: 'galaxy',
                 fieldCount: 3
             });
-            fractal.init('galaxy');
 
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                title.resize();
-                stars.resize();
-                fractal.resize();
-            }
+            title.show();
 
             window.addEventListener('resize', function() {
                 clearTimeout(timeout);
                 timeout = setTimeout(resize, 256);
             }, false);
         };
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            title.resize();
+            stars.resize();
+        }
+    }());
     </script>
 </body>
 </html>

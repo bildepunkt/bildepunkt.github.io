@@ -19,11 +19,6 @@ canvas {
 	left: 0;
 }
 
-
-.title {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 128px;
-	font-weight: 400;
-	color: #fff;
-	text-align: center;
+.title-container {
+    visibility: hidden;
 }
