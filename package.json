@@ -1,0 +1,18 @@
+{
+  "name": "c-concat-p",
+  "version": "0.0.0",
+  "description": "portfolio page of chris peters",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://c-concat-p.github.io/"
+  },
+  "author": "Chris Peters",
+  "license": "ISC",
+  "devDependencies": {
+    "jquery": "^2.1.1"
+  }
+}

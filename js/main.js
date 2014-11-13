@@ -1,20 +1,37 @@
-/**
- * Main
- */
+(function() {
+    var canvas;
+    var context;
 
-$(document).ready(function() {
+    function init() {
+        var timeout;
 
-	cp.templateManager.init('templates/templates.html', _.template);
-	cp.templateManager.$observable.on('templatesready', function() {
-		cp.router.init();
-		cp.viewport.init();
-		cp.logo.init($('.logo'));
-		cp.stars.init(0.1, $('.stars-container'));
-		//cp.countdown.init($('.launch-container'), 'March 20, 2014');
-	});
+        canvas = document.getElementById('galaxy');
+        context = canvas.getContext('2d');
 
-});
+        window.removeEventListener('load', init, false);
 
-$.namespace('cp.cssPrefixes', [
-	'-webkit-', '-moz-', '-ms-', '-o-', ''
-]);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        stars.init({
+            canvasId: 'galaxy',
+            fieldCount: 3
+        });
+        title.init('title');
+
+        window.addEventListener('resize', function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(resize, 256);
+        }, false);
+    };
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        title.resize();
+        stars.resize();
+    }
+    
+    window.addEventListener('load', init, false);
+}());

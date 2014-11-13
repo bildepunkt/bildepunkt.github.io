@@ -13,8 +13,8 @@
 
     <!-- <link rel="shortcut icon" href="favicon.ico"> -->
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
 
     <title>chris peters</title>
 </head>
@@ -27,49 +27,9 @@
         </div>
     </section>
 
-    <section>
-        <h1>asdfasdf</h1>
-    </section>
-
-    <script src="js/lib/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/title.js"></script>
     <script src="js/stars.js"></script>
-    <script>
-    (function() {
-        window.addEventListener('load', init, false);
-
-        function init() {
-            var canvas = document.getElementById('galaxy');
-            var context = canvas.getContext('2d');
-            var timeout;
-
-            window.removeEventListener('load', init, false);
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            title.init('title', true);
-            stars.init({
-                canvasId: 'galaxy',
-                fieldCount: 3
-            });
-
-            title.show();
-
-            window.addEventListener('resize', function() {
-                clearTimeout(timeout);
-                timeout = setTimeout(resize, 256);
-            }, false);
-        };
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            title.resize();
-            stars.resize();
-        }
-    }());
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

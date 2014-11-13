@@ -15,7 +15,15 @@ var title = (function() {
     };
 
     var show = function() {
-        el.style.visibility = 'visible';
+        if (jQuery) {
+
+            $(el).css({
+                display: 'none',
+                visibility: 'visible'
+            }).fadeIn(1000);
+        } else {
+            el.style.visibility = 'visible';
+        }
     };
 
     var resize = function() {
