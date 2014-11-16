@@ -1,14 +1,23 @@
+/**
+ * Issues
+ * #1: http://stackoverflow.com/questions/14876035/background-size-cover-not-working-in-portrait-on-android-tablet
+ */
 html {
     background: url(../img/nebula-dark.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    // #1
+    height:100%;
+    min-height:100%;
 }
 
 body {
 	margin: 0;
     color: #ccc;
+    // #1
+    min-height:100%;
 }
 
 a {
