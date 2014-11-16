@@ -1,42 +1,35 @@
 var title = (function() {
-    var el;
-    var vpWidth;
-    var vpHeight;
+    var $el;
+    var $win; 
 
-    var init = function(id, manualShow) {
-        el = document.getElementById(id);
-        el.style.position = 'absolute';
-
-        if (!manualShow) {
-            show();
-        }
+    var init = function(id) {
+        $win = $(window);
+        $el = $('#' + id).css('position', 'absolute');
 
         resize();
+        show();
     };
 
     var show = function() {
-        if (jQuery) {
-
-            $(el).css({
-                display: 'none',
-                visibility: 'visible'
-            }).fadeIn(1000);
-        } else {
-            el.style.visibility = 'visible';
-        }
+        $el.css({
+            opacity: 0,
+            visibility: 'visible',
+            top: (parseInt($el.css('top'), 10) + 32) + 'px'
+        }).animate({
+            opacity: 1,
+            top: '-=32'
+        }, 1000);
     };
 
     var resize = function() {
-        vpWidth  = window.innerWidth;
-        vpHeight = window.innerHeight;
-
-        el.style.top  = (vpHeight / 2 - el.offsetHeight / 2) + 'px';
-        el.style.left = (vpWidth / 2 - el.offsetWidth / 2) + 'px';
+        $el.css({
+            left: ($win.width() / 2 - $el.width() / 2) + 'px',
+            top: ($win.height() / 2 - $el.height() / 2) + 'px'
+        });
     };
 
     return {
         init: init,
-        show: show,
         resize: resize
     };
 }());
