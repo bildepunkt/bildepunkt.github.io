@@ -19,10 +19,10 @@
         });
         title.init('title');
 
-        window.addEventListener('resize', function() {
+        $(window).bind('resize', function() {
             clearTimeout(timeout);
             timeout = setTimeout(resize, 256);
-        }, false);
+        });
     };
 
     function resize() {
@@ -33,5 +33,5 @@
         stars.resize();
     }
     
-    window.addEventListener('load', init, false);
+    $(document).ready(init);
 }());
