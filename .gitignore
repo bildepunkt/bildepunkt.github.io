@@ -1,5 +1,5 @@
-# OS generated files #
-######################
+# OS generated files
+####################
 .DS_Store
 .DS_Store?
 ._*
@@ -8,6 +8,10 @@
 ehthumbs.db
 Thumbs.db
 
-# node js #
-###########
+# node js
+#########
 node_modules
+
+# misc
+######
+*.sublime-*
