@@ -1,4 +1,6 @@
 var title = (function() {
+    'use strict';
+
     var $el;
     var $win; 
 

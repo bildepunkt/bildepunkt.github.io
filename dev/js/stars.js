@@ -1,112 +1,132 @@
-var stars = (function() {
+var Star = (function() {
+    'use strict';
+
+    var config = {
+        randColorRange: 65,
+        useGradient: true
+    };
+    var context;
+
+    var Star = function(options) {
+        this.x = 0;
+        this.y = 0;
+        this.radius = 8;
+        this.opacity = 1;
+        this.color = null;
+
+        for (var prop in options) {
+            this[prop] = options[prop];
+        }
+
+        context = options.context;
+
+        if (!this.color) {
+            this.color = this.getFill();
+        }
+    };
+
+    Star.prototype.getFill = function(x, y, opacity, radius) {
+        var r = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
+        var g = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
+        var b = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
+        var display;
+
+        if (this.radius > 1 && config.useGradient) {
+            display = context.createRadialGradient(this.x, this.y, 1, this.x, this.y, this.radius);
+            display.addColorStop(0, 'rgba(' + [r,g,b,this.opacity].join(',') + ')');
+            display.addColorStop(1, 'rgba(' + [r,g,b,0].join(',') + ')');
+
+            return display;
+        } else {
+            return 'rgba(' + [r,g,b,this.opacity].join(',') + ')';
+        }
+    };
+
+    return Star;
+}());
+
+var Starfield = (function() {
+    'use strict';
+
     var offset = {
         x: 0,
         y: 0
     };
-    var fields = [];
-    var config;
+    var config = {
+        radiusSeed: 3
+    };
+    var field = [];
+    var starCount;
     var vpWidth;
     var vpHeight;
     var canvas;
     var context;
 
-    var init = function(options) {
-        var factor = 1;
-        config = options;
-        vpWidth = window.innerWidth;
-        vpHeight = window.innerHeight;
-        canvas = document.getElementById(config.canvasId);
-        context = canvas.getContext('2d');
-
-        for(var i = 0; i < config.fieldCount; i += 1) {
-            fields.push({
-                type: 'stars',
-                count: Math.round((config.fieldCount - i) * vpWidth / 8),
-                radius: i + 1,
-                factor: factor++,
-                entities: []
-            });
+    var Starfield = function(options) {
+        for (var prop in config) {
+            this[prop] = options[prop];
         }
-
-        resize();
-    };
-
-    var resize = function() {
-        var field, i, len;
 
         vpWidth = window.innerWidth;
         vpHeight = window.innerHeight;
+        canvas = options.canvas;
+        context = options.context;
 
-        for(i = 0, len = fields.length; i < len; i += 1) {
-            field = fields[i];
-            field.count = Math.round((config.fieldCount - i) * vpWidth / 8);
-            field.entities = [];
-            populateEntities(field);
-        }
-
-        render();
+        this.resize();
     };
 
-    var populateEntities = function(field) {
+    Starfield.prototype.resize = function() {
+        vpWidth = window.innerWidth;
+        vpHeight = window.innerHeight;
+
+        starCount = vpWidth / 4;
+        field = [];
+        this.populateEntities();
+
+        this.render();
+    };
+
+    Starfield.prototype.populateEntities = function() {
         var radius, x, y, opacity;
 
-        for(var i = 0; i < field.count; i += 1) {
-            radius = Math.round(Math.random() * field.radius);
+
+        for(var i = 0; i < starCount; i += 1) {
+            radius = Math.round(Math.random() * config.radiusSeed);
             x = Math.round(Math.random() * vpWidth);
             y = Math.round(Math.random() * vpHeight);
-            opacity = 0.5 + (Math.random() - 0.5);
-            field.entities.push({
-                x: x,
-                y: y,
-                radius: radius,
-                opacity: opacity,
-                color: getFillStyle(x, y, opacity, radius)
-            });
+            opacity = 0.5 + Math.round((Math.random() - 0.5) * 100) / 100;
+
+            field.push(
+                new Star({
+                    x: x,
+                    y: y,
+                    radius: radius,
+                    opacity: opacity,
+                    context: context
+                })
+            );
         }
     };
 
-    var render = function() {
-        var field, entity;
+    Starfield.prototype.render = function() {
+        var star;
 
-        for(var f = 0, len = fields.length; f < len; f += 1) {
-            field = fields[f];
-            for(var e = 0; e < field.entities.length; e += 1) {
-                entity = field.entities[e];
-                context.fillStyle = entity.color;
-                context.beginPath();
-                context.arc(
-                    entity.x,
-                    entity.y,
-                    entity.radius,
-                    0,
-                    2 * Math.PI,
-                    false
-                );
-                context.closePath();
-                context.fill();
-            }
+        for(var e = 0; e < field.length; e += 1) {
+            star = field[e];
+            context.fillStyle = star.color;
+            context.beginPath();
+            context.arc(
+                star.x,
+                star.y,
+                star.radius,
+                0,
+                2 * Math.PI,
+                false
+            );
+            context.closePath();
+            context.fill();
         }
     };
 
-    var getFillStyle = function(x, y, opacity, radius) {
-        var r = Math.round(Math.random() * 65) + 190;
-        var g = Math.round(Math.random() * 65) + 190;
-        var b = Math.round(Math.random() * 65) + 190;
-        var display;
-
-        if (radius > 1) {
-            display = context.createRadialGradient(x, y, 1, x, y, radius);
-            display.addColorStop(0, 'rgba(' + [r,g,b,opacity].join(',') + ')');
-            display.addColorStop(1, 'rgba(' + [r,g,b,0].join(',') + ')');
-
-            return display;
-        } else {
-            return 'rgba(' + [r,g,b,opacity].join(',') + ')';
-        }
-    };
-
-    return {
-        init: init,
-        resize: resize
-    };
+    return Starfield;
 }());

@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Chris Peters">
-    <meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, single page apps, and responsive design.">
+    <meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, interactive design, single page apps, and responsive design.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/min/prod.css">
 
     <!-- <link rel="shortcut icon" href="favicon.ico"> -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -18,7 +17,10 @@
     <title>chris peters</title>
 </head>
 <body>
-    <canvas class="galaxy" id="galaxy"></canvas>
+    <div class="universe">
+        <canvas class="galaxy" id="starfieldAlpha"></canvas>
+        <canvas class="galaxy" id="starfieldBeta"></canvas>
+    </div>
 
     <section>
         <div id="title" class="title-container">
@@ -26,8 +28,8 @@
         </div>
     </section>
 
-    <!-- <script src="//code.jquery.com/jquery-2.1.1.min.js"></script> -->
-    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery.js"></script>
+
     <script src="js/min/prod.js"></script>
 </body>
 </html>
