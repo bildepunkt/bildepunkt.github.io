@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Chris Peters">
-    <meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, interactive design, single page apps, and responsive design.">
+    <meta name="description" content="I am a front-end web developer located Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, interactive design, single page apps, and responsive design.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--[css] -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <!-- [css]-->
 
@@ -25,17 +26,31 @@
         <canvas class="galaxy" id="starfieldBeta"></canvas>
     </div>
 
-    <section>
-        <div id="title" class="title-container">
-            <img src="img/cp-logo-light.png">
-        </div>
-    </section>
+    <div class="content-wrapper">
+        <section>
+            <div id="title" class="title-container">
+                <img src="img/cp-logo-light.png">
+            </div>
+        </section>
 
-    <script src="js/lib/jquery.js"></script>
+        <section>
+            <div>foozbarz</div>
+        </section>
+    </div>
+
+    <nav>
+        <ul>
+            <li class="sink">contact</li>
+            <li class="sink">about</li>
+        </ul>
+    </nav>
+
+    <script src="js/lib/jquery.min.js"></script>
 
     <!--[js] -->
     <script src="js/title.js"></script>
     <script src="js/stars.js"></script>
+    <script src="js/sections.js"></script>
     <script src="js/main.js"></script>
     <!-- [js]-->
 </body>

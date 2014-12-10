@@ -1,0 +1,37 @@
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+nav > ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li {
+    color: #6D4783;
+    background-color: black;
+    padding-bottom: 4px;
+    margin: 24px 36px 0 0;
+    display: inline-block;
+    border-bottom: 2px solid;
+    cursor: pointer;
+}
+
+.sink {
+    display: inline-block;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    color: #8965A2;
+}
+.sink:hover, .sink:focus, .sink:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    color: #AA8CBD;
+}

@@ -33,6 +33,7 @@
             radiusSeed: 2
         });
 
+        sections.init();
         title.init('title');
 
         $(window).bind('resize', resizeHandler);
@@ -55,6 +56,7 @@
             starfieldAlphaContext.clearRect(0, 0, starfieldAlphaCanvas.width, starfieldAlphaCanvas.height);
             starfieldBetaContext.clearRect(0, 0, starfieldBetaCanvas.width, starfieldBetaCanvas.height);
 
+            sections.resize();
             title.resize();
             starfieldAlpha.resize();
             starfieldBeta.resize();
