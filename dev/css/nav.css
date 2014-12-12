@@ -11,7 +11,7 @@ nav > ul {
 }
 
 nav li {
-    color: #6D4783;
+    color: #8965A2;
     background-color: black;
     padding-bottom: 4px;
     margin: 24px 36px 0 0;
@@ -22,16 +22,17 @@ nav li {
 
 .sink {
     display: inline-block;
-    -webkit-transition-duration: 0.2s;
-    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.1s;
     -webkit-transition-property: transform;
     transition-property: transform;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    color: #8965A2;
+    transition-timing-function: ease-out;
+    -webkit-transition-timing-function: ease-out;
 }
 .sink:hover, .sink:focus, .sink:active {
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
     color: #AA8CBD;
 }

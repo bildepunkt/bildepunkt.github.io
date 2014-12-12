@@ -1,4 +1,35 @@
 var nav = (function() {
+    return {
+        $links: null,
+
+        init: function() {
+            this.$links = $('nav li');
+
+            this.$links.bind('click', this.onLinkClick.bind(this));
+
+            if (document.location.hash) {
+                this.follow(document.location.hash.replace('#', ''));
+            }
+        },
+
+        onLinkClick: function(e) {
+            this.follow($(e.target).html());
+        },
+
+        follow: function(location) {
+            $('html body').stop().animate({
+                scrollTop: $('#' + location).offset().top
+            }, function() {
+                document.location.hash = location;
+            });
+        }
+    };
+}());
+
+
+
+
+/*var nav = (function() {
     var $trigger;
     var $linkContainer;
     var $links;
@@ -39,7 +70,7 @@ var nav = (function() {
     /**
      * @param {string} location
      */
-    var follow = function(location) {
+    /*var follow = function(location) {
         var $newCurr = $('#' + location);
 
         document.location.hash = location;
@@ -53,4 +84,4 @@ var nav = (function() {
     return {
         init: init
     };
-}());
+}());*/

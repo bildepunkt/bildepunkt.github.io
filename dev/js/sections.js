@@ -1,22 +1,24 @@
 var sections = (function() {
     'use strict';
 
-    var $win;
-    var $sections;
-
     return {
+        $win: null,
+        $sections: null,
         minHeight: null,
 
         init: function() {
-            $win = $(window);
-            $sections = $('section');
+            this.$win = $(window);
+            this.$sections = $('section');
 
-            this.minHeight = $sections.css('minHeight');
+            this.minHeight = this.$sections.css('minHeight');
             this.resize();
         },
 
         resize: function() {
-            $sections.css('height', ($win.height() <= this.minHeight) ? this.minHeight : $win.height() + 'px');
+            this.$sections.css(
+                'height',
+                (this.$win.height() <= this.minHeight) ? this.minHeight : this.$win.height() + 'px'
+            );
         }
     };
 }());
