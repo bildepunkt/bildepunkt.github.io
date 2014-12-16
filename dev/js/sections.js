@@ -16,7 +16,7 @@ var sections = (function() {
 
         resize: function() {
             this.$sections.css(
-                'height',
+                'minHeight',
                 (this.$win.height() <= this.minHeight) ? this.minHeight : this.$win.height() + 'px'
             );
         }

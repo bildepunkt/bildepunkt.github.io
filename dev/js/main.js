@@ -36,6 +36,7 @@
         sections.init();
         title.init();
         nav.init();
+        footer.init();
 
         $(window).bind('resize', resizeHandler);
         $(document).bind('mousemove', mousemoveHandler);
