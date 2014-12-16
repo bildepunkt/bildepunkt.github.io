@@ -1,3 +1,15 @@
+var footer = (function() {
+    'use strict';
+
+    return {
+        $el: null,
+
+        init: function() {
+            this.$el = $('footer');
+            this.$el.find('span').html(new Date().getFullYear());
+        }
+    };
+}());
 (function() {
     'use strict';
 
@@ -34,7 +46,9 @@
         });
 
         sections.init();
-        title.init('title');
+        title.init();
+        nav.init();
+        footer.init();
 
         $(window).bind('resize', resizeHandler);
         $(document).bind('mousemove', mousemoveHandler);
@@ -53,6 +67,11 @@
             starfieldBetaCanvas.width = window.innerWidth;
             starfieldBetaCanvas.height = window.innerHeight;
 
+            starfieldAlphaCanvas.style.left = 0;
+            starfieldAlphaCanvas.style.top = 0;
+            starfieldBetaCanvas.style.left = 0;
+            starfieldBetaCanvas.style.top = 0;
+
             starfieldAlphaContext.clearRect(0, 0, starfieldAlphaCanvas.width, starfieldAlphaCanvas.height);
             starfieldBetaContext.clearRect(0, 0, starfieldBetaCanvas.width, starfieldBetaCanvas.height);
 
@@ -64,7 +83,7 @@
     }
 
     function mousemoveHandler(e) {
-        $(starfieldAlphaCanvas).stop().animate({
+        $(starfieldAlphaCanvas).animate({
             left: (e.pageX - starfieldAlphaCanvas.width / 2) * -0.06,
             top: (e.pageY - starfieldAlphaCanvas.height / 2) * -0.06
         }, {
@@ -73,7 +92,7 @@
             easing: 'smoothmove'
         });
 
-        $(starfieldBetaCanvas).stop().animate({
+        $(starfieldBetaCanvas).animate({
             left: (e.pageX - starfieldBetaCanvas.width / 2) * -0.03,
             top: (e.pageY - starfieldBetaCanvas.height / 2) * -0.03
         }, {
@@ -86,104 +105,105 @@
     $(document).ready(init);
 }());
 var nav = (function() {
-    var $trigger;
-    var $linkContainer;
-    var $links;
-    var $curr;
-
-    var init = function() {
-        $curr = $('#home');
-        $trigger = $('nav #trigger');
-        $linkContainer = $('nav #links')
-        $links = $('.link');
-
-        $trigger.bind('click', triggerClick);
-        $links.bind('click', linksClick);
-        $(window).bind('hashchange', onHashchange);
-
-        if (document.location.hash) {
-            follow(document.location.hash.replace('#', ''));
-        } else {
-            $curr.fadeIn(1000);
-        }
-    };
-
-    var onHashchange = function() {
-        follow(document.location.hash.replace('#', ''));
-    };
-
-    var triggerClick = function() {
-        $trigger.stop().fadeOut();
-        $linkContainer.stop().fadeIn();
-    };
-
-    var linksClick = function(e) {
-        follow($(this).html());
-        $trigger.stop().fadeIn();
-        $linkContainer.stop().fadeOut();
-    };
-
-    /**
-     * @param {string} location
-     */
-    var follow = function(location) {
-        var $newCurr = $('#' + location);
-
-        document.location.hash = location;
-
-        $curr.stop().fadeOut();
-        $newCurr.stop().fadeIn();
-
-        $curr = $newCurr;
-    };
+    'use strict';
 
     return {
-        init: init
+        $links: null,
+        scrollTimer: null,
+        pageSelector: 'section',
+        scrollOffset: 64,
+
+        init: function() {
+            this.$links = $('nav li');
+
+            this.$links.bind('click', this.onLinkClick.bind(this));
+            $(window).bind('scroll', this.onPageScroll.bind(this));
+
+            if (document.location.hash) {
+                this.follow(document.location.hash.replace('#', ''));
+            }
+        },
+
+        onLinkClick: function(e) {
+            this.follow($(e.target).html());
+        },
+
+        onPageScroll: function(e) {
+            var self = this;
+
+            clearTimeout(this.scrollTimer);
+            this.scrollTimer = setTimeout(function() {
+                var scrollTop = $('html body').scrollTop();
+                var $item;
+                var location;
+
+                $(self.pageSelector).each(function() {
+                    $item = $(this);
+                    location = $item.attr('id');
+
+                    if (scrollTop > $item.offset().top - self.scrollOffset &&
+                        scrollTop < $item.offset().top + self.scrollOffset) {
+
+                        // scroll to section when close
+                        if (document.location.hash.replace('#', '') != location) {
+                            self.follow(location);
+                        }
+                        return;
+                    }
+                });
+            }, 256);
+        },
+
+        follow: function(location) {
+            $('html body').stop().animate({
+                scrollTop: $('#' + location).offset().top
+            }, function() {
+                document.location.hash = location;
+            });
+        }
     };
 }());
+
 var sections = (function() {
     'use strict';
 
-    var $win;
-    var $sections;
-
     return {
+        $win: null,
+        $sections: null,
         minHeight: null,
 
         init: function() {
-            $win = $(window);
-            $sections = $('section');
+            this.$win = $(window);
+            this.$sections = $('section');
 
-            this.minHeight = $sections.css('minHeight');
+            this.minHeight = this.$sections.css('minHeight');
             this.resize();
         },
 
         resize: function() {
-            $sections.css('height', ($win.height() <= this.minHeight) ? this.minHeight : $win.height() + 'px');
+            this.$sections.css(
+                'minHeight',
+                (this.$win.height() <= this.minHeight) ? this.minHeight : this.$win.height() + 'px'
+            );
         }
     };
 }());
 var Star = (function() {
     'use strict';
 
-    var config = {
-        randColorRange: 65,
-        useGradient: true
-    };
-    var context;
-
     var Star = function(options) {
+        this.randColorRange = 65;
+        this.useGradient = true;
         this.x = 0;
         this.y = 0;
         this.radius = 8;
         this.opacity = 1;
         this.color = null;
+        this.context = null;
 
         for (var prop in options) {
             this[prop] = options[prop];
         }
-
-        context = options.context;
 
         if (!this.color) {
             this.color = this.getFill();
@@ -191,13 +211,13 @@ var Star = (function() {
     };
 
     Star.prototype.getFill = function(x, y, opacity, radius) {
-        var r = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
-        var g = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
-        var b = Math.round(Math.random() * config.randColorRange) + 255 - config.randColorRange;
+        var r = this.getRandRGB();
+        var g = this.getRandRGB();
+        var b = this.getRandRGB();
         var display;
 
-        if (this.radius > 1 && config.useGradient) {
-            display = context.createRadialGradient(this.x, this.y, 1, this.x, this.y, this.radius);
+        if (this.radius > 1 && this.useGradient) {
+            display = this.context.createRadialGradient(this.x, this.y, 1, this.x, this.y, this.radius);
             display.addColorStop(0, 'rgba(' + [r,g,b,this.opacity].join(',') + ')');
             display.addColorStop(1, 'rgba(' + [r,g,b,0].join(',') + ')');
 
@@ -207,45 +227,41 @@ var Star = (function() {
         }
     };
 
+    Star.prototype.getRandRGB = function() {
+        return Math.round(Math.random() * this.randColorRange) + 255 - this.randColorRange;
+    };
+
     return Star;
 }());
 
 var Starfield = (function() {
     'use strict';
 
-    var offset = {
-        x: 0,
-        y: 0
-    };
-    var config = {
-        radiusSeed: 3
-    };
-    var field = [];
-    var starCount;
-    var vpWidth;
-    var vpHeight;
-    var canvas;
-    var context;
-
     var Starfield = function(options) {
-        for (var prop in config) {
+        this.radiusSeed = 3;
+        this.field     = [];
+        this.starCount = null;
+        this.vpWidth   = null;
+        this.vpHeight  = null;
+        this.canvas    = null;
+        this.context   = null;
+
+        for (var prop in options) {
             this[prop] = options[prop];
         }
 
-        vpWidth = window.innerWidth;
-        vpHeight = window.innerHeight;
-        canvas = options.canvas;
-        context = options.context;
+        this.vpWidth = window.innerWidth;
+        this.vpHeight = window.innerHeight;
 
         this.resize();
     };
 
     Starfield.prototype.resize = function() {
-        vpWidth = window.innerWidth;
-        vpHeight = window.innerHeight;
+        this.vpWidth = window.innerWidth;
+        this.vpHeight = window.innerHeight;
 
-        starCount = vpWidth / 4;
-        field = [];
+        this.starCount = this.vpWidth / 4;
+        this.field = [];
         this.populateEntities();
 
         this.render();
@@ -255,19 +271,19 @@ var Starfield = (function() {
         var radius, x, y, opacity;
 
 
-        for(var i = 0; i < starCount; i += 1) {
-            radius = Math.round(Math.random() * config.radiusSeed);
-            x = Math.round(Math.random() * vpWidth);
-            y = Math.round(Math.random() * vpHeight);
+        for(var i = 0; i < this.starCount; i += 1) {
+            radius = Math.round(Math.random() * this.radiusSeed);
+            x = Math.round(Math.random() * this.vpWidth);
+            y = Math.round(Math.random() * this.vpHeight);
             opacity = 0.5 + Math.round((Math.random() - 0.5) * 100) / 100;
 
-            field.push(
+            this.field.push(
                 new Star({
                     x: x,
                     y: y,
                     radius: radius,
                     opacity: opacity,
-                    context: context
+                    context: this.context
                 })
             );
         }
@@ -276,11 +292,11 @@ var Starfield = (function() {
     Starfield.prototype.render = function() {
         var star;
 
-        for(var e = 0; e < field.length; e += 1) {
-            star = field[e];
-            context.fillStyle = star.color;
-            context.beginPath();
-            context.arc(
+        for(var e = 0; e < this.field.length; e += 1) {
+            star = this.field[e];
+            this.context.fillStyle = star.color;
+            this.context.beginPath();
+            this.context.arc(
                 star.x,
                 star.y,
                 star.radius,
@@ -288,8 +304,8 @@ var Starfield = (function() {
                 2 * Math.PI,
                 false
             );
-            context.closePath();
-            context.fill();
+            this.context.closePath();
+            this.context.fill();
         }
     };
 
@@ -298,33 +314,33 @@ var Starfield = (function() {
 var title = (function() {
     'use strict';
 
-    var $el;
-    var $win; 
-
-    var show = function() {
-        $el.css({
-            opacity: 0,
-            visibility: 'visible',
-            top: (parseInt($el.css('top'), 10) + 32) + 'px'
-        }).animate({
-            opacity: 1,
-            top: '-=32'
-        }, 1000);
-    };
-
     return {
-        init: function(id) {
-            $win = $(window);
-            $el = $('#' + id).css('position', 'absolute');
+        $el: null,
+        $win: null,
+
+        init: function() {
+            this.$win = $(window);
+            this.$el = $('#title').css('position', 'absolute');
 
             this.resize();
-            show();
+            this.show();
+        },
+
+        show: function() {
+            this.$el.css({
+                opacity: 0,
+                visibility: 'visible',
+                top: (parseInt(this.$el.css('top'), 10) + 32) + 'px'
+            }).animate({
+                opacity: 1,
+                top: '-=32'
+            }, 1000);
         },
 
         resize: function() {
-            $el.css({
-                left: ($win.width() / 2 - $el.width() / 2) + 'px',
-                top: ($win.height() / 2 - $el.height() / 2) + 'px'
+            this.$el.css({
+                left: (this.$win.width() / 2 - this.$el.width() / 2) + 'px',
+                top: (this.$win.height() / 2 - this.$el.height() / 2) + 'px'
             });
         }
     };

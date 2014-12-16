@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Chris Peters">
-    <meta name="description" content="I am a front-end web developer from Vancouver, BC Canada. I specialize in maintainable, extensible javascript, html5, css3, interactive design, single page apps, and responsive design.">
+    <meta name="description" content="I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible javascript, HTML5, CSS3, interactive design, single page apps, and responsive design.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="css/prod.css">
@@ -22,13 +22,31 @@
         <canvas class="galaxy" id="starfieldBeta"></canvas>
     </div>
 
-    <div class="content-wrapper">
-        <section>
+    <div class="wrapper">
+        <section id="home">
             <div id="title" class="title-container">
                 <img src="img/cp-logo-light.png">
             </div>
         </section>
+
+        <section id="about">
+            <div class="content-container">
+                <div class="content">
+                    <h1 class="content-header">self.helloWorld();</h1>
+                    <p class="content-paragraph">Hello! I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible Javascript, HTML5 & CSS3, as well as interactive design, single page apps, and responsive design.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>Copyright &copy; <span></span> Chris Peters. All Rights Reserved.</footer>
     </div>
+
+    <nav>
+        <ul>
+            <li class="sink">home</li>
+            <li class="sink">about</li>
+        </ul>
+    </nav>
 
     <script src="js/lib/jquery.min.js"></script>
 
