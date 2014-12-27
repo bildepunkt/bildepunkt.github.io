@@ -1,10 +1,19 @@
 nav {
     position: fixed;
-    top: 0;
-    right: 0;
+    width: 100%;
 }
 
-nav > ul {
+nav > div {
+    position: absolute;
+    top: 0;
+    text-align: right;
+    width: 100%;
+    padding-bottom: 24px;
+    background-color: black;
+    box-shadow: 0 2px 12px 0 black;
+}
+
+nav ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -12,27 +21,23 @@ nav > ul {
 
 nav li {
     color: #8965A2;
-    background-color: black;
+    display: inline-block;
     padding-bottom: 4px;
     margin: 24px 24px 0 0;
-    display: inline-block;
     border-bottom: 2px solid;
     cursor: pointer;
 }
 
-.sink {
-    display: inline-block;
-    -webkit-transition-duration: 0.1s;
-    transition-duration: 0.1s;
-    -webkit-transition-property: transform;
-    transition-property: transform;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+.link {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: border-width, color;
+    transition-property: border-width, color;
     transition-timing-function: ease-out;
     -webkit-transition-timing-function: ease-out;
 }
-.sink:hover, .sink:focus, .sink:active {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
+
+.link:hover, .link:focus, .link:active {
+    border-width: 4px;
     color: #AA8CBD;
 }

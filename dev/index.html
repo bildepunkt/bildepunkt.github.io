@@ -7,11 +7,16 @@
     <meta name="description" content="I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible javascript, HTML5, CSS3, interactive design, single page apps, and responsive design.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+
     <!--[css] -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
     <link rel="stylesheet" type="text/css" href="css/content.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400' rel='stylesheet' type='text/css'>
     <!-- [css]-->
 
     <!-- <link rel="shortcut icon" href="favicon.ico"> -->
@@ -37,20 +42,24 @@
         <section id="about">
             <div class="content-container">
                 <div class="content">
-                    <h1 class="content-header">self.helloWorld();</h1>
-                    <p class="content-paragraph">Hello! I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible Javascript, HTML5 & CSS3, as well as interactive design, single page apps, and responsive design.</p>
+                    <h1 class="content-header">Hello Universe!</h1>
+                    <p class="content-paragraph">I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible Javascript, HTML5 & CSS3, as well as interactive design, single page apps, and responsive design.</p>
                 </div>
             </div>
         </section>
 
-        <footer>Copyright &copy; <span></span> Chris Peters. All Rights Reserved.</footer>
+        <footer>
+            <p class="disclaimer">Copyright &copy; <span></span> Chris Peters. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <nav>
-        <ul>
-            <li class="sink">home</li>
-            <li class="sink">about</li>
-        </ul>
+        <div>
+            <ul>
+                <li class="link">home</li>
+                <li class="link">about</li>
+            </ul>
+        </div>
     </nav>
 
     <script src="js/lib/jquery.min.js"></script>

@@ -20,7 +20,7 @@ html {
 body {
 	margin: 0;
     color: #ccc;
-    font-family: "OpenSans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     // #1
     min-height:100%;
 }
@@ -64,7 +64,7 @@ canvas.galaxy {
     visibility: hidden;
 }
 
-footer {
+footer .disclaimer {
     color: gray;
     font-size: 12px;
     padding: 24px;

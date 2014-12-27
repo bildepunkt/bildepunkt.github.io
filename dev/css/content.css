@@ -11,9 +11,12 @@
 }
 
 .content-header {
-    font-size: 32px;
+    font-family: Ubuntu, sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+
 }
 
 .content-paragraph {
-    font-size: px;
+    font-size: 24px;
 }
