@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
     <link rel="stylesheet" type="text/css" href="css/content.css">
+    <link rel="stylesheet" type="text/css" href="css/solar-system.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:700,400' rel='stylesheet' type='text/css'>
     <!-- [css]-->
@@ -33,17 +34,32 @@
     </div>
 
     <div class="wrapper">
-        <section id="home">
+        <section id="goto-home">
             <div id="title" class="title-container">
                 <img src="img/cp-logo-light.png">
             </div>
         </section>
 
-        <section id="about">
+        <section id="goto-about">
             <div class="content-container">
                 <div class="content">
                     <h1 class="content-header">Hello Universe!</h1>
                     <p class="content-paragraph">I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible Javascript, HTML5 & CSS3, as well as interactive design, single page apps, and responsive design.</p>
+
+                    <div class="reload-on-nav">
+                        <div class="solar-system">
+                            <div class="celestial-body sun"></div>
+                            <div class="celestial-body planet mercury"></div>
+                            <div class="celestial-body planet venus"></div>
+                            <div class="celestial-body planet earth"></div>
+                            <div class="celestial-body planet mars"></div>
+                            <div class="celestial-body planet jupiter"></div>
+                            <div class="celestial-body planet saturn"></div>
+                            <div class="saturnian-rings"></div>
+                            <div class="celestial-body planet neptune"></div>
+                            <div class="celestial-body planet uranus"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -56,8 +72,8 @@
     <nav>
         <div>
             <ul>
-                <li class="link">home</li>
-                <li class="link">about</li>
+                <li id="link-home" class="link">home</li>
+                <li id="link-about" class="link">about</li>
             </ul>
         </div>
     </nav>
