@@ -1,15 +1,20 @@
 @media (max-width: 640px) {
-  .solar-system {
-    position: relative;
-    width: 300px;
-    height: 100px;
-  }
-
-  .saturnian-rings {
-    box-shadow: 0 0 4px .5px black; 
+  .solar-system-container {
+    display: none;
   }
 }
 @media (min-width: 641px) and (max-width: 960px) {
+  .solar-system {
+    position: relative;
+    width: 450px;
+    height: 150px;
+  }
+
+  .saturnian-rings {
+    box-shadow: 0 0 8px 1px black; 
+  }
+}
+@media (min-width: 961px) {
   .solar-system {
     position: relative;
     width: 600px;
@@ -20,16 +25,15 @@
     box-shadow: 0 0 8px 1px black; 
   }
 }
-@media (min-width: 961px) {
-  .solar-system {
-    position: relative;
-    width: 900px;
-    height: 300px;
-  }
-
-  .saturnian-rings {
-    box-shadow: 0 0 8px 1px black; 
-  }
+.solar-system-container {
+  position: relative;
+  padding: 4%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 24px;
+  box-shadow: 0 0 24px 1px #000 inset;
+}
+.solar-system {
+  overflow: hidden;
 }
 .celestial-body {
   -webkit-animation-duration: .4s;
@@ -141,6 +145,24 @@
   -webkit-animation-delay: .33s;
           animation-delay: .33s;
 }
+.earth-pin {
+  border-radius: 100px 100px 0 100px;
+  width: 16%;
+  height: 48%;
+  background-color: #008AFF;
+  position: absolute;
+  top: -8.6%;
+  left: 34%;
+  visibility: hidden;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-name: pin-populate;
+          animation-name: pin-populate;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
 .mars {
   width: 0.4%;
   height: 1.2%;
@@ -184,6 +206,52 @@
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
   visibility: hidden;
+}
+@-webkit-keyframes pin-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0, 0) rotate(65deg);
+            transform: scale(0, 0) rotate(65deg);
+  }
+
+  33% {
+    -webkit-transform: scale(0.4, 1.4) rotate(65deg);
+            transform: scale(0.4, 1.4) rotate(65deg);
+  }
+
+  66% {
+    -webkit-transform: scale(1.2, 0.8) rotate(65deg);
+            transform: scale(1.2, 0.8) rotate(65deg);
+  }
+
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1) rotate(65deg);
+            transform: scale(1) rotate(65deg);
+  }
+}
+@keyframes pin-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0, 0) rotate(65deg);
+            transform: scale(0, 0) rotate(65deg);
+  }
+
+  33% {
+    -webkit-transform: scale(0.4, 1.4) rotate(65deg);
+            transform: scale(0.4, 1.4) rotate(65deg);
+  }
+
+  66% {
+    -webkit-transform: scale(1.2, 0.8) rotate(65deg);
+            transform: scale(1.2, 0.8) rotate(65deg);
+  }
+
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1) rotate(65deg);
+            transform: scale(1) rotate(65deg);
+  }
 }
 @-webkit-keyframes ring-toss {
   from {

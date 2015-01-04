@@ -11,11 +11,14 @@
 }
 
 .content-header {
-    font-size: 32px;
+    font-family: Ubuntu, sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+
 }
 
 .content-paragraph {
-    font-size: px;
+    font-size: 24px;
 }
 /**
  * Issues
@@ -39,7 +42,7 @@ html {
 body {
 	margin: 0;
     color: #ccc;
-    font-family: "OpenSans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     // #1
     min-height:100%;
 }
@@ -83,7 +86,7 @@ canvas.galaxy {
     visibility: hidden;
 }
 
-footer {
+footer .disclaimer {
     color: gray;
     font-size: 12px;
     padding: 24px;
@@ -92,11 +95,20 @@ footer {
 
 nav {
     position: fixed;
-    top: 0;
-    right: 0;
+    width: 100%;
 }
 
-nav > ul {
+nav > div {
+    position: absolute;
+    top: 0;
+    text-align: right;
+    width: 100%;
+    padding-bottom: 24px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 12px 0 black;
+}
+
+nav ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -104,27 +116,285 @@ nav > ul {
 
 nav li {
     color: #8965A2;
-    background-color: black;
+    display: inline-block;
     padding-bottom: 4px;
     margin: 24px 24px 0 0;
-    display: inline-block;
     border-bottom: 2px solid;
     cursor: pointer;
 }
 
-.sink {
-    display: inline-block;
-    -webkit-transition-duration: 0.1s;
-    transition-duration: 0.1s;
-    -webkit-transition-property: transform;
-    transition-property: transform;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+.link {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: border-width, color;
+    transition-property: border-width, color;
     transition-timing-function: ease-out;
     -webkit-transition-timing-function: ease-out;
 }
-.sink:hover, .sink:focus, .sink:active {
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);
+
+.link:hover, .link:focus, .link:active {
+    border-width: 4px;
     color: #AA8CBD;
+}
+
+@media (max-width: 640px) {
+  .solar-system {
+    position: relative;
+    width: 300px;
+    height: 100px;
+  }
+
+  .saturnian-rings {
+    box-shadow: 0 0 4px .5px black; 
+  }
+}
+@media (min-width: 641px) and (max-width: 960px) {
+  .solar-system {
+    position: relative;
+    width: 600px;
+    height: 200px;
+  }
+
+  .saturnian-rings {
+    box-shadow: 0 0 8px 1px black; 
+  }
+}
+@media (min-width: 961px) {
+  .solar-system {
+    position: relative;
+    width: 900px;
+    height: 300px;
+  }
+
+  .saturnian-rings {
+    box-shadow: 0 0 8px 1px black; 
+  }
+}
+.celestial-body {
+  -webkit-animation-duration: .4s;
+          animation-duration: .4s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  background-color: white;
+  border-radius: 600px;
+  visibility: hidden;
+}
+.planet {
+  -webkit-animation-name: planet-populate;
+          animation-name: planet-populate;
+}
+@-webkit-keyframes planet-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  75% {
+    -webkit-transform: scale(1.8);
+            transform: scale(1.8);
+  }
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes planet-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  75% {
+    -webkit-transform: scale(1.8);
+            transform: scale(1.8);
+  }
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes sun-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  75% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes sun-populate {
+  from {
+    visibility: visible;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  75% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  to {
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+.sun {
+  -webkit-animation-name: sun-populate;
+          animation-name: sun-populate;
+  width: 33.3%;
+  height: 100%;
+}
+.mercury {
+  width: 0.4%;
+  height: 1.2%;
+  position: absolute;
+  top: 49.4%;
+  left: 34.8%;
+  -webkit-animation-delay: .11s;
+          animation-delay: .11s;
+}
+.venus {
+  width: 0.7%;
+  height: 2.1%;
+  position: absolute;
+  top: 48.95%;
+  left: 36%;
+  -webkit-animation-delay: .22s;
+          animation-delay: .22s;
+}
+.earth {
+  width: 0.9%;
+  height: 2.7%;
+  position: absolute;
+  top: 48.65%;
+  left: 37.2%;
+  -webkit-animation-delay: .33s;
+          animation-delay: .33s;
+}
+.mars {
+  width: 0.4%;
+  height: 1.2%;
+  position: absolute;
+  top: 49.4%;
+  left: 38.8%;
+  -webkit-animation-delay: .44s;
+          animation-delay: .44s;
+}
+.jupiter {
+  width: 3%;
+  height: 9%;
+  position: absolute;
+  top: 45.5%;
+  left: 47%;
+  -webkit-animation-delay: .55s;
+          animation-delay: .55s;
+}
+.saturn {
+  width: 2.6%;
+  height: 7.8%;
+  position: absolute;
+  top: 46.1%;
+  left: 58%;
+  -webkit-animation-delay: .66s;
+          animation-delay: .66s;
+}
+.saturnian-rings {
+  left: 56.8%;
+  width: 5%;
+  height: 1%;
+  position: absolute;
+  background-color: white;
+  border-radius: 25px;
+  -webkit-animation-name: ring-toss;
+          animation-name: ring-toss;
+  -webkit-animation-duration: .8s;
+          animation-duration: .8s;
+  -webkit-animation-delay: .88s;
+          animation-delay: .88s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  visibility: hidden;
+}
+@-webkit-keyframes ring-toss {
+  from {
+    top: 25%;
+    -webkit-transform: rotate(50deg);
+            transform: rotate(50deg);
+    visibility: visible;
+  }
+  25% {
+    top: 55%;
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  50% {
+    top: 49.6%;
+    -webkit-transform: rotate(40deg);
+            transform: rotate(40deg);
+  }
+  75% {
+    -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+  }
+  to {
+    top: 49.6%;
+    -webkit-transform: rotate(20deg);
+            transform: rotate(20deg);
+    visibility: visible;
+  }
+}
+@keyframes ring-toss {
+  from {
+    top: 25%;
+    -webkit-transform: rotate(50deg);
+            transform: rotate(50deg);
+    visibility: visible;
+  }
+  25% {
+    top: 55%;
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  50% {
+    top: 49.6%;
+    -webkit-transform: rotate(40deg);
+            transform: rotate(40deg);
+  }
+  75% {
+    -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+  }
+  to {
+    top: 49.6%;
+    -webkit-transform: rotate(20deg);
+            transform: rotate(20deg);
+    visibility: visible;
+  }
+}
+.neptune {
+  width: 1.6%;
+  height: 4.8%;
+  position: absolute;
+  top: 47.6%;
+  left: 78.2%;
+  -webkit-animation-delay: .77s;
+          animation-delay: .77s;
+}
+.uranus {
+  width: 1.6%;
+  height: 4.8%;
+  position: absolute;
+  top: 47.6%;
+  left: 98.4%;
+  -webkit-animation-delay: .88s;
+          animation-delay: .88s;
 }

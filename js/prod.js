@@ -111,7 +111,6 @@ var nav = (function() {
         $links: null,
         scrollTimer: null,
         pageSelector: 'section',
-        scrollOffset: 64,
 
         init: function() {
             this.$links = $('nav li');
@@ -120,12 +119,12 @@ var nav = (function() {
             $(window).bind('scroll', this.onPageScroll.bind(this));
 
             if (document.location.hash) {
-                this.follow(document.location.hash.replace('#', ''));
+                this.goto(document.location.hash.replace('#', ''));
             }
         },
 
         onLinkClick: function(e) {
-            this.follow($(e.target).html());
+            this.goto($(e.target).attr('id').replace('link-', ''));
         },
 
         onPageScroll: function(e) {
@@ -139,27 +138,47 @@ var nav = (function() {
 
                 $(self.pageSelector).each(function() {
                     $item = $(this);
-                    location = $item.attr('id');
+                    location = $item.attr('id').replace('goto-', '');
 
-                    if (scrollTop > $item.offset().top - self.scrollOffset &&
-                        scrollTop < $item.offset().top + self.scrollOffset) {
-
-                        // scroll to section when close
-                        if (document.location.hash.replace('#', '') != location) {
-                            self.follow(location);
-                        }
-                        return;
+                    if (scrollTop >= $item.offset().top - $item.height() * 0.5 &&
+                        scrollTop <  $item.offset().top + $item.height() * 0.5) {
+                        self.setLocation(location);
                     }
                 });
+
             }, 256);
         },
 
-        follow: function(location) {
-            $('html body').stop().animate({
-                scrollTop: $('#' + location).offset().top
-            }, function() {
-                document.location.hash = location;
-            });
+        goto: function(location, noScroll) {
+            var self = this;
+
+            if (!noScroll) {
+                $('html body').stop().animate({
+                    scrollTop: $('#goto-' + location).offset().top
+                }, function() {
+                    self.setLocation(location);
+                });
+            } else {
+                this.setLocation(location);
+            }
+        },
+
+        setLocation: function(location) {
+            var $reloads = $('#goto-' + location).find('.reload-on-nav');
+            var $item;
+            var html;
+
+            if (location != document.location.hash.replace('#', '')) {
+                $reloads.each(function() {
+                    $item = $(this);
+                    html = $item.html();
+
+                    $item.html('');
+                    $item.html(html);
+                });
+            }
+
+            document.location.hash = location;
         }
     };
 }());
