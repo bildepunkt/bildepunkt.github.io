@@ -5,6 +5,7 @@ var nav = (function() {
         $links: null,
         scrollTimer: null,
         pageSelector: 'section',
+        lastScrollTop: null,
 
         init: function() {
             this.$links = $('nav li');
@@ -27,16 +28,26 @@ var nav = (function() {
             clearTimeout(this.scrollTimer);
             this.scrollTimer = setTimeout(function() {
                 var scrollTop = $('html body').scrollTop();
+                var scrollingUp = scrollTop < self.lastScrollTop;
                 var $item;
                 var location;
+
+                self.lastScrollTop = scrollTop;
 
                 $(self.pageSelector).each(function() {
                     $item = $(this);
                     location = $item.attr('id').replace('goto-', '');
 
-                    if (scrollTop >= $item.offset().top - $item.height() * 0.5 &&
-                        scrollTop <  $item.offset().top + $item.height() * 0.5) {
-                        self.setHash(location);
+                    if (scrollingUp) {
+                        if (scrollTop >= $item.offset().top - $item.height() * 0.65 &&
+                            scrollTop <  $item.offset().top + $item.height() * 0.35) {
+                            self.setLocation(location);
+                        }
+                    } else {
+                        if (scrollTop >= $item.offset().top - $item.height() * 0.15 &&
+                            scrollTop <  $item.offset().top + $item.height() * 0.85) {
+                            self.setLocation(location);
+                        }
                     }
                 });
 
@@ -50,25 +61,25 @@ var nav = (function() {
                 $('html body').stop().animate({
                     scrollTop: $('#goto-' + location).offset().top
                 }, function() {
-                    self.setHash(location);
+                    self.setLocation(location);
                 });
             } else {
-                this.setHash(location);
+                this.setLocation(location);
             }
         },
 
-        setHash: function(location) {
+        setLocation: function(location) {
             var $reloads = $('#goto-' + location).find('.reload-on-nav');
             var $item;
             var html;
 
+            // when changing nav location, reload els to restart css animations
             if (location != document.location.hash.replace('#', '')) {
                 $reloads.each(function() {
                     $item = $(this);
                     html = $item.html();
 
-                    $item.html('');
-                    $item.html(html);
+                    $item.html('').html(html);
                 });
             }
 
