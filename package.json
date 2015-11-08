@@ -1,0 +1,22 @@
+{
+  "name": "new-site",
+  "version": "0.1.0",
+  "description": "ma new site",
+  "main": "index.html",
+  "scripts": {
+    "watch": "",
+    "test": ""
+  },
+  "author": "c-concat-p",
+  "license": "none",
+  "dependencies": {},
+  "devDependencies": {
+    "babelify": "6.4.0",
+    "browserify": "12.0.1",
+    "gulp": "3.9.0",
+    "gulp-sourcemaps": "1.6.0",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.6.0"
+  }
+}
