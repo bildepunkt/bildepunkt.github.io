@@ -6,81 +6,68 @@ class Main {
     constructor() {
         this.initLogo();
         this.initUniverse();
+        this.update();
     }
 
     initLogo() {
-        let logo = document.querySelector('#logo');
-        let attractor = new Attractor({
+        this.logo = document.querySelector('#logo');
+        this.logoAttractor = new Attractor({
             drag: 12,
             threshold: 0.01,
-            startY: -100
+            startY: -60
         });
-        let targetY = -130;
-        let targetOpacity = 1;
-
-        logo.style.marginTop = 0;
-
-        function update() {
-            let target = attractor.getTarget();
-
-            // use x for opacity here for efficiency
-            attractor.update( targetOpacity, targetY );
-            logo.style.opacity = target.x;
-            logo.style.marginTop = `${target.y}px`;
-
-            if (target.y > targetY) {
-                window.requestAnimationFrame(update);
-            }
-
-            console.log(target.x);
-        }
-
-        update();
     }
 
     initUniverse() {
-        let canvas1 = new Canvas({ id: 'galaxy1' });
-        let canvas2 = new Canvas({ id: 'galaxy2' });
+        this.canvas1 = new Canvas({ id: 'galaxy1' });
+        this.canvas2 = new Canvas({ id: 'galaxy2' });
 
-        let canvasEl1 = canvas1.getEl();
-        let canvasEl2 = canvas2.getEl();
+        this.canvasEl1 = this.canvas1.getEl();
+        this.canvasEl2 = this.canvas2.getEl();
 
-        let attractor1 = new Attractor({
+        this.attractor1 = new Attractor({
             magnitude: -0.08,
             drag: 12
         });
-        let attractor2 = new Attractor({
+        this.attractor2 = new Attractor({
             magnitude: -0.04,
             drag: 12
         });
 
-        let mouseX, mouseY;
+        this.mouseX = 0;
+        this.mouseY = 0;
 
-        new Starfield({ canvas: canvas1 });
-        new Starfield({ canvas: canvas2 });
+        new Starfield({ canvas: this.canvas1 });
+        new Starfield({ canvas: this.canvas2 });
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX - window.innerWidth / 2;
-            mouseY = e.clientY - window.innerHeight / 2;
+            this.mouseX = e.clientX - window.innerWidth / 2;
+            this.mouseY = e.clientY - window.innerHeight / 2;
         }, false);
+    }
 
-        function update() {
-            attractor1.update( mouseX, mouseY );
-            attractor2.update( mouseX, mouseY );
+    update() {
+        // universe
+        this.attractor1.update( this.mouseX, this.mouseY );
+        this.attractor2.update( this.mouseX, this.mouseY );
 
-            let t1 = attractor1.getTarget();
-            let t2 = attractor2.getTarget();
+        let t1 = this.attractor1.getTarget();
+        let t2 = this.attractor2.getTarget();
 
-            canvasEl1.style.left = `${t1.x}px`;
-            canvasEl1.style.top = `${t1.y}px`;
+        this.canvasEl1.style.left = `${t1.x}px`;
+        this.canvasEl1.style.top = `${t1.y}px`;
 
-            canvasEl2.style.left = `${t2.x}px`;
-            canvasEl2.style.top = `${t2.y}px`;
+        this.canvasEl2.style.left = `${t2.x}px`;
+        this.canvasEl2.style.top = `${t2.y}px`;
 
-            window.requestAnimationFrame(update);
-        }
+        // logo
+        this.logoAttractor.update( 1, -130 );
+        let logoTarget = this.logoAttractor.getTarget();
+        // use x for opacity here for efficiency
+        this.logo.style.opacity = logoTarget.x;
+        this.logo.style.marginTop = `${logoTarget.y}px`;
 
-        update();
+        window.requestAnimationFrame(this.update.bind(this));
     }
 }
 

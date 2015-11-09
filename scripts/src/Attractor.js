@@ -11,17 +11,17 @@ export default class Attractor {
             threshold: 0.2
         };
 
+        this.options = Object.assign(this.options, options || {});
+
         this.target = {
             x: this.options.startX,
             y: this.options.startY
         };
-
-        this.options = Object.assign(this.options, options || {});
     }
 
     update(x, y) {
-        x = x || this.startX;
-        y = y || this.startY;
+        x = x || 0;
+        y = y || 0;
 
         let dx = (x * this.options.magnitude) - this.target.x;
         let dy = (y * this.options.magnitude) - this.target.y;

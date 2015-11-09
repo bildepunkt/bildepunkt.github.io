@@ -25,85 +25,74 @@ var Main = (function () {
 
         this.initLogo();
         this.initUniverse();
+        this.update();
     }
 
     _createClass(Main, [{
         key: 'initLogo',
         value: function initLogo() {
-            var logo = document.querySelector('#logo');
-            var attractor = new _srcAttractor2['default']({
+            this.logo = document.querySelector('#logo');
+            this.logoAttractor = new _srcAttractor2['default']({
                 drag: 12,
                 threshold: 0.01,
-                startY: -100
+                startY: -60
             });
-            var targetY = -130;
-            var targetOpacity = 1;
-
-            logo.style.marginTop = 0;
-
-            function update() {
-                var target = attractor.getTarget();
-
-                // use x for opacity here for efficiency
-                attractor.update(targetOpacity, targetY);
-                logo.style.opacity = target.x;
-                logo.style.marginTop = target.y + 'px';
-
-                if (target.y > targetY) {
-                    window.requestAnimationFrame(update);
-                }
-
-                console.log(target.x);
-            }
-
-            update();
         }
     }, {
         key: 'initUniverse',
         value: function initUniverse() {
-            var canvas1 = new _srcCanvas2['default']({ id: 'galaxy1' });
-            var canvas2 = new _srcCanvas2['default']({ id: 'galaxy2' });
+            var _this = this;
 
-            var canvasEl1 = canvas1.getEl();
-            var canvasEl2 = canvas2.getEl();
+            this.canvas1 = new _srcCanvas2['default']({ id: 'galaxy1' });
+            this.canvas2 = new _srcCanvas2['default']({ id: 'galaxy2' });
 
-            var attractor1 = new _srcAttractor2['default']({
+            this.canvasEl1 = this.canvas1.getEl();
+            this.canvasEl2 = this.canvas2.getEl();
+
+            this.attractor1 = new _srcAttractor2['default']({
                 magnitude: -0.08,
                 drag: 12
             });
-            var attractor2 = new _srcAttractor2['default']({
+            this.attractor2 = new _srcAttractor2['default']({
                 magnitude: -0.04,
                 drag: 12
             });
 
-            var mouseX = undefined,
-                mouseY = undefined;
+            this.mouseX = 0;
+            this.mouseY = 0;
 
-            new _srcStarfield2['default']({ canvas: canvas1 });
-            new _srcStarfield2['default']({ canvas: canvas2 });
+            new _srcStarfield2['default']({ canvas: this.canvas1 });
+            new _srcStarfield2['default']({ canvas: this.canvas2 });
 
             window.addEventListener('mousemove', function (e) {
-                mouseX = e.clientX - window.innerWidth / 2;
-                mouseY = e.clientY - window.innerHeight / 2;
+                _this.mouseX = e.clientX - window.innerWidth / 2;
+                _this.mouseY = e.clientY - window.innerHeight / 2;
             }, false);
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            // universe
+            this.attractor1.update(this.mouseX, this.mouseY);
+            this.attractor2.update(this.mouseX, this.mouseY);
 
-            function update() {
-                attractor1.update(mouseX, mouseY);
-                attractor2.update(mouseX, mouseY);
+            var t1 = this.attractor1.getTarget();
+            var t2 = this.attractor2.getTarget();
 
-                var t1 = attractor1.getTarget();
-                var t2 = attractor2.getTarget();
+            this.canvasEl1.style.left = t1.x + 'px';
+            this.canvasEl1.style.top = t1.y + 'px';
 
-                canvasEl1.style.left = t1.x + 'px';
-                canvasEl1.style.top = t1.y + 'px';
+            this.canvasEl2.style.left = t2.x + 'px';
+            this.canvasEl2.style.top = t2.y + 'px';
 
-                canvasEl2.style.left = t2.x + 'px';
-                canvasEl2.style.top = t2.y + 'px';
+            // logo
+            this.logoAttractor.update(1, -130);
+            var logoTarget = this.logoAttractor.getTarget();
+            // use x for opacity here for efficiency
+            this.logo.style.opacity = logoTarget.x;
+            this.logo.style.marginTop = logoTarget.y + 'px';
 
-                window.requestAnimationFrame(update);
-            }
-
-            update();
+            window.requestAnimationFrame(this.update.bind(this));
         }
     }]);
 
@@ -138,19 +127,19 @@ var Attractor = (function () {
             threshold: 0.2
         };
 
+        this.options = Object.assign(this.options, options || {});
+
         this.target = {
             x: this.options.startX,
             y: this.options.startY
         };
-
-        this.options = Object.assign(this.options, options || {});
     }
 
     _createClass(Attractor, [{
         key: "update",
         value: function update(x, y) {
-            x = x || this.startX;
-            y = y || this.startY;
+            x = x || 0;
+            y = y || 0;
 
             var dx = x * this.options.magnitude - this.target.x;
             var dy = y * this.options.magnitude - this.target.y;
