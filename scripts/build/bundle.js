@@ -7,6 +7,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var _srcTicker = require('./src/Ticker');
+
+var _srcTicker2 = _interopRequireDefault(_srcTicker);
+
 var _srcCanvas = require('./src/Canvas');
 
 var _srcCanvas2 = _interopRequireDefault(_srcCanvas);
@@ -23,22 +27,14 @@ var Main = (function () {
     function Main() {
         _classCallCheck(this, Main);
 
-        this.initLogo();
+        _srcTicker2['default'].start();
+
         this.initUniverse();
-        this.update();
+
+        document.addEventListener('ontick', this.update.bind(this));
     }
 
     _createClass(Main, [{
-        key: 'initLogo',
-        value: function initLogo() {
-            this.logo = document.querySelector('#logo');
-            this.logoAttractor = new _srcAttractor2['default']({
-                drag: 12,
-                threshold: 0.01,
-                startY: -60
-            });
-        }
-    }, {
         key: 'initUniverse',
         value: function initUniverse() {
             var _this = this;
@@ -72,7 +68,6 @@ var Main = (function () {
     }, {
         key: 'update',
         value: function update() {
-            // universe
             this.attractor1.update(this.mouseX, this.mouseY);
             this.attractor2.update(this.mouseX, this.mouseY);
 
@@ -84,15 +79,6 @@ var Main = (function () {
 
             this.canvasEl2.style.left = t2.x + 'px';
             this.canvasEl2.style.top = t2.y + 'px';
-
-            // logo
-            this.logoAttractor.update(1, -130);
-            var logoTarget = this.logoAttractor.getTarget();
-            // use x for opacity here for efficiency
-            this.logo.style.opacity = logoTarget.x;
-            this.logo.style.marginTop = logoTarget.y + 'px';
-
-            window.requestAnimationFrame(this.update.bind(this));
         }
     }]);
 
@@ -101,7 +87,7 @@ var Main = (function () {
 
 new Main();
 
-},{"./src/Attractor":2,"./src/Canvas":3,"./src/Starfield":5}],2:[function(require,module,exports){
+},{"./src/Attractor":2,"./src/Canvas":3,"./src/Starfield":5,"./src/Ticker":6}],2:[function(require,module,exports){
 /**
  *
  */
@@ -331,7 +317,6 @@ var Starfield = (function () {
         };
 
         this.stars = null;
-
         this.options = Object.assign(this.options, options || {});
 
         this.populateField();
@@ -407,7 +392,71 @@ var Starfield = (function () {
 exports['default'] = Starfield;
 module.exports = exports['default'];
 
-},{"./Star":4}]},{},[1])
+},{"./Star":4}],6:[function(require,module,exports){
+/**
+ *
+ */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var Ticker = (function () {
+    function Ticker() {
+        _classCallCheck(this, Ticker);
+    }
+
+    // static props
+
+    _createClass(Ticker, null, [{
+        key: 'start',
+        value: function start() {
+            this.update();
+        }
+    }, {
+        key: 'pause',
+        value: function pause() {
+            this.paused = true;
+        }
+    }, {
+        key: 'resume',
+        value: function resume() {
+            this.paused = false;
+            this.start();
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.paused) {
+                return;
+            }
+
+            document.dispatchEvent(this.event);
+            this.ticks++;
+
+            window.requestAnimationFrame(this.update.bind(this));
+        }
+    }]);
+
+    return Ticker;
+})();
+
+exports['default'] = Ticker;
+Ticker.paused = false;
+Ticker.ticks = 0;
+Ticker.event = new CustomEvent('ontick', {
+    detail: {
+        ticks: Ticker.ticks
+    }
+});
+module.exports = exports['default'];
+
+},{}]},{},[1])
 
 
 //# sourceMappingURL=bundle.js.map

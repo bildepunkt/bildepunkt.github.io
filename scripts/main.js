@@ -1,21 +1,15 @@
+import Ticker from './src/Ticker';
 import Canvas from './src/Canvas';
 import Starfield from './src/Starfield';
 import Attractor from './src/Attractor';
 
 class Main {
     constructor() {
-        this.initLogo();
-        this.initUniverse();
-        this.update();
-    }
+        Ticker.start();
 
-    initLogo() {
-        this.logo = document.querySelector('#logo');
-        this.logoAttractor = new Attractor({
-            drag: 12,
-            threshold: 0.01,
-            startY: -60
-        });
+        this.initUniverse();
+
+        document.addEventListener('ontick', this.update.bind(this));
     }
 
     initUniverse() {
@@ -47,7 +41,6 @@ class Main {
     }
 
     update() {
-        // universe
         this.attractor1.update( this.mouseX, this.mouseY );
         this.attractor2.update( this.mouseX, this.mouseY );
 
@@ -59,15 +52,6 @@ class Main {
 
         this.canvasEl2.style.left = `${t2.x}px`;
         this.canvasEl2.style.top = `${t2.y}px`;
-
-        // logo
-        this.logoAttractor.update( 1, -130 );
-        let logoTarget = this.logoAttractor.getTarget();
-        // use x for opacity here for efficiency
-        this.logo.style.opacity = logoTarget.x;
-        this.logo.style.marginTop = `${logoTarget.y}px`;
-
-        window.requestAnimationFrame(this.update.bind(this));
     }
 }
 

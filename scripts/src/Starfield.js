@@ -12,7 +12,6 @@ export default class Starfield {
         };
 
         this.stars = null;
-
         this.options = Object.assign(this.options, options || {});
 
         this.populateField();

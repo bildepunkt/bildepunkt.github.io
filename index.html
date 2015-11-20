@@ -16,24 +16,26 @@
     <title>Welcome | Chris Peters</title>
 </head>
 <body>
-    <canvas id="galaxy1" class="galaxy"></canvas>
-    <canvas id="galaxy2" class="galaxy"></canvas>
+    <div class="universe">
+        <canvas id="galaxy1" class="galaxy"></canvas>
+        <canvas id="galaxy2" class="galaxy"></canvas>
+    </div>
 
     <div id="logo" class="logo">
-        <svg version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="260" viewBox="0 0 200 260" overflow="visible" enable-background="new 0 0 200 260" xml:space="preserve">
-            <g id="Layer_5" display="none"></g>
-            <g id="original_size__x28_grid_x29_">
-                <g id="light_1_">
-                    <polygon fill="#4F595B" points="80,40 0,80 0,120 80,80      "/>
-                    <polygon fill="#8A989F" points="100,130 0,80 0,120 100,169      "/>
-                    <polygon fill="#4F595B" points="100,110 200,60 200,100 100,149      "/>
-                    <rect x="80" y="30.57" fill="#8A989F" width="39" height="228"/>
-                    <polygon fill="#8A989F" points="80,0 199,60 199,100 80,40       "/>
-                </g>
+        <svg version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="260"
+             viewBox="0 0 200 260" overflow="visible" enable-background="new 0 0 200 260" xml:space="preserve">
+            <g id="logoGroup">
+                <polygon class="logo-piece logo-piece-nw" fill="#4F595B" points="80,40 0,80 0,120 80,80"/>
+                <polygon class="logo-piece logo-piece-sw" fill="#8A989F" points="100,130 0,80 0,120 100,169"/>
+                <polygon class="logo-piece logo-piece-se" fill="#4F595B" points="100,110 200,60 200,100 100,149"/>
+                <rect x="80" y="31" fill="#8A989F" width="39" height="228"/>
+                <polygon class="logo-piece logo-piece-ne" fill="#8A989F" points="80,0 199,60 199,100 80,40"/>
             </g>
         </svg>
     </div>
+
     <!-- scripts -->
+    <script src="scripts/src/lib/raf.js"></script>
     <script src="scripts/build/bundle.js"></script>
 </body>
 </html>

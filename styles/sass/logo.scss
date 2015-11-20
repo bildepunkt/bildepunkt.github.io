@@ -1,0 +1,54 @@
+.logo {
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -130px;
+    position: absolute;
+    top: 50%;
+    animation-duration: 1s;
+    animation-name: slidein;
+}
+
+.logo-piece-nw {
+    animation-duration: 0.6s;
+    animation-name: movein-nw;
+}
+.logo-piece-sw {
+    animation-duration: 0.7s;
+    animation-name: movein-sw;
+}
+.logo-piece-se {
+    animation-duration: 0.8s;
+    animation-name: movein-se;
+}
+.logo-piece-ne {
+    animation-duration: 0.9s;
+    animation-name: movein-ne;
+}
+
+@keyframes movein-nw {
+    from { transform: rotate(-60deg); }
+    to { transform: rotate(0); }
+}
+@keyframes movein-sw {
+    from { transform: rotate(60deg); }
+    to { transform: rotate(0); }
+}
+@keyframes movein-se {
+    from { transform: rotate(30deg); }
+    to { transform: rotate(0); }
+}
+@keyframes movein-ne {
+    from { transform: rotate(-30deg); }
+    to { transform: rotate(0); }
+}
+
+@keyframes slidein {
+    from {
+        margin-top: -40px;
+        opacity: 0;
+    }
+    to {
+        margin-top: -130px;
+        opacity: 1;
+    }
+}
