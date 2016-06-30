@@ -68,4 +68,9 @@ theme: apollo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/c-concat-p/c-concat-p.github.io.git
+  branch: master
+  message: [message]
+  name: [git user]
+  email: [git email]
