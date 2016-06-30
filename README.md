@@ -1,4 +1,2 @@
-chris peters
-============
-
-my portfolio site
+hexo blog
+=========

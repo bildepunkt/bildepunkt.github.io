@@ -1,6 +1,5 @@
-# system
+# sys
 .DS_Store
 
-# node
+# npm
 node_modules
-npm-debug.log
