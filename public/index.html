@@ -18,30 +18,50 @@
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/styles/main.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
 <body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
+  <div class="mobile-nav-panel">
+    <i class="icon-reorder icon-large"></i>
 </div>
 <header id="header">
-	<h1 class="blog-title">
-		<a href="/">forward/slash</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://c-concat-p.js.org"></form>
-	</div>
+    <div id="universe" class="universe">
+        <canvas id="galaxy1" class="galaxy"></canvas>
+        <canvas id="galaxy2" class="galaxy"></canvas>
+
+        <div id="logo" class="logo">
+            <svg version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="260"
+                 viewBox="0 0 200 260" overflow="visible" enable-background="new 0 0 200 260" xml:space="preserve">
+                <g id="logoGroup">
+                    <polygon class="logo-piece logo-piece-nw" fill="#4F595B" points="80,40 0,80 0,120 80,80"/>
+                    <polygon class="logo-piece logo-piece-sw" fill="#8A989F" points="100,130 0,80 0,120 100,169"/>
+                    <polygon class="logo-piece logo-piece-se" fill="#4F595B" points="100,110 200,60 200,100 100,149"/>
+                    <rect x="80" y="31" fill="#8A989F" width="39" height="228"/>
+                    <polygon class="logo-piece logo-piece-ne" fill="#8A989F" points="80,0 199,60 199,100 80,40"/>
+                </g>
+            </svg>
+        </div>
+
+        <h1 class="blog-title">
+            <a href="/">forward/slash</a>
+        </h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+                <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+                <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+            </ul>
+        </nav>
+        <div id="search-form-wrap">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://c-concat-p.js.org"></form>
+        </div>
+    </div>
 </header>
-    <div id="main">
+  <div id="container">
+    <div id="main" class="main">
       
   
     <article id="post-hello-world" class="post">
@@ -104,7 +124,7 @@
   
 
     </div>
-    <div class="mb-search">
+    <div id="mb-search" class="mb-search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
     <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:c-concat-p.js.org">
@@ -122,14 +142,8 @@
 </footer>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
+<script src="/scripts/raf.js"></script>
+<script src="/scripts/bundle.js"></script>
   </div>
 </body>
 </html>

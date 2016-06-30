@@ -1,4 +1,4 @@
-/*(function($){
+(function($){
   // Search
   var $searchWrap = $('#search-form-wrap'),
     isSearchAnim = false,
@@ -110,4 +110,4 @@
     $(".nav").toggleClass("active")
   });
 
-})(jQuery);*/
+})(jQuery);
