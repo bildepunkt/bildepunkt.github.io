@@ -1,23 +1,21 @@
 {
-  "name": "new-site",
+  "name": "portfolio-site",
   "version": "0.1.0",
-  "description": "ma new site",
+  "description": "The protfolio and blog site of Chris Peters",
+  "repository": "https://github.com/c-concat-p/c-concat-p.github.io.git",
   "main": "index.html",
   "scripts": {
-    "watch": "",
-    "test": ""
+    "watch:styles": "./node_modules/.bin/node-sass -w ./styles/sass -o ./styles/css",
+    "watch:scripts": "./node_modules/.bin/webpack --watch --config webpack.config.js"
   },
   "author": "c-concat-p",
-  "license": "none",
+  "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "babelify": "6.4.0",
-    "browserify": "12.0.1",
-    "gulp": "3.9.0",
-    "gulp-sass": "^2.1.0",
-    "gulp-sourcemaps": "1.6.0",
-    "vinyl-buffer": "1.0.0",
-    "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.0"
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "node-sass": "^3.8.0",
+    "webpack": "^1.13.1"
   }
 }

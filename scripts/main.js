@@ -7,15 +7,8 @@ class Main {
     constructor() {
         Ticker.start();
 
-        this.initUniverse();
-
-        document.addEventListener('ontick', this.update.bind(this));
-    }
-
-    initUniverse() {
         this.canvas1 = new Canvas({ id: 'galaxy1' });
         this.canvas2 = new Canvas({ id: 'galaxy2' });
-
         this.canvasEl1 = this.canvas1.getEl();
         this.canvasEl2 = this.canvas2.getEl();
 
@@ -38,6 +31,8 @@ class Main {
             this.mouseX = e.clientX - window.innerWidth / 2;
             this.mouseY = e.clientY - window.innerHeight / 2;
         }, false);
+
+        document.addEventListener('ontick', this.update.bind(this));
     }
 
     update() {
