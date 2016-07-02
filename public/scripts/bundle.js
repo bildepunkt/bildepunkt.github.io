@@ -44,23 +44,214 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	"use strict";
 	
 	var _Ticker = __webpack_require__(1);
 	
 	var _Ticker2 = _interopRequireDefault(_Ticker);
 	
-	var _Canvas = __webpack_require__(2);
+	var _Tween = __webpack_require__(2);
+	
+	var _Tween2 = _interopRequireDefault(_Tween);
+	
+	var _easing = __webpack_require__(3);
+	
+	var _Galaxy = __webpack_require__(4);
+	
+	var _Galaxy2 = _interopRequireDefault(_Galaxy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.onload = function () {
+	    new _Ticker2.default();
+	
+	    var header = document.getElementById("header");
+	    var staticBg = document.getElementById("static_background");
+	    var vpHeight = window.innerHeight + "px";
+	
+	    header.style.height = vpHeight;
+	    staticBg.style.height = vpHeight;
+	
+	    document.body.style.opacity = 0;
+	    document.body.style.display = "block";
+	    new _Tween2.default(document.body.style, "opacity", 0, 1, 1000, _easing.easeOut);
+	
+	    new _Galaxy2.default();
+	};
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
+	 */
+	
+	var Ticker = function () {
+	    function Ticker() {
+	        _classCallCheck(this, Ticker);
+	
+	        this.ticks = 0;
+	        this.event = new CustomEvent("ontick", {
+	            detail: { ticks: this.ticks }
+	        });
+	
+	        this.update = this.update.bind(this);
+	        this.update();
+	    }
+	
+	    _createClass(Ticker, [{
+	        key: "update",
+	        value: function update() {
+	            document.dispatchEvent(this.event);
+	            this.ticks++;
+	            window.requestAnimationFrame(this.update);
+	        }
+	    }]);
+	
+	    return Ticker;
+	}();
+	
+	exports.default = Ticker;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
+	 * @param {Any}      entity the entity to assign value to
+	 * @param {String}   prop   The entity's property name 
+	 * @param {Any}      from   initial value
+	 * @param {Any}      end    end value
+	 * @param {Integer}  ms     The length of the tween in milliseconds
+	 * @param {Function} easing The easing function
+	 */
+	
+	var Tween = function () {
+	    function Tween(entity, prop, start, end, ms, easing, onComplete) {
+	        _classCallCheck(this, Tween);
+	
+	        this.entity = entity;
+	        this.prop = prop;
+	        this.start = start;
+	        this.end = end;
+	        this.ms = ms;
+	        this.easing = easing;
+	        this.onComplete = onComplete;
+	        this.currentFrame = 0;
+	        this.totalFrames = Math.round(this.ms / (1000 / 60));
+	
+	        this.update = this.update.bind(this);
+	        document.addEventListener("ontick", this.update, false);
+	    }
+	
+	    _createClass(Tween, [{
+	        key: "isComplete",
+	        value: function isComplete() {
+	            return this.currentFrame >= this.totalFrames;
+	        }
+	    }, {
+	        key: "update",
+	        value: function update() {
+	            if (this.currentFrame < this.totalFrames) {
+	                this.entity[this.prop] = this.easing(this.currentFrame, this.start, this.end, this.totalFrames);
+	            } else {
+	                if (this.onComplete) {
+	                    this.onComplete();
+	                }
+	
+	                document.removeEventListener("ontick", this.update, false);
+	            }
+	
+	            this.currentFrame += 1;
+	        }
+	    }]);
+	
+	    return Tween;
+	}();
+	
+	exports.default = Tween;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * @param  {number} t current time
+	 * @param  {number} b start value
+	 * @param  {number} c change in value
+	 * @param  {number} d duration
+	 * @return {number}   the new position   
+	 */
+	var linear = exports.linear = function linear(t, b, c, d) {
+	    return c * t / d + b;
+	};
+	
+	// quadradic
+	var easeIn = exports.easeIn = function easeIn(t, b, c, d) {
+	    t /= d;
+	    return c * t * t + b;
+	};
+	
+	var easeOut = exports.easeOut = function easeOut(t, b, c, d) {
+	    t /= d;
+	    return -c * t * (t - 2) + b;
+	};
+	
+	var easeInOut = exports.easeInOut = function easeInOut(t, b, c, d) {
+	    t /= d;
+	    return -c * t * (t - 2) + b;
+	};
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _Canvas = __webpack_require__(5);
 	
 	var _Canvas2 = _interopRequireDefault(_Canvas);
 	
-	var _Starfield = __webpack_require__(3);
+	var _Starfield = __webpack_require__(6);
 	
 	var _Starfield2 = _interopRequireDefault(_Starfield);
 	
-	var _Attractor = __webpack_require__(5);
+	var _Attractor = __webpack_require__(8);
 	
 	var _Attractor2 = _interopRequireDefault(_Attractor);
 	
@@ -68,18 +259,19 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Main = function () {
-	    function Main() {
+	/**
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
+	 */
+	
+	var Galaxy = function () {
+	    function Galaxy() {
 	        var _this = this;
 	
-	        _classCallCheck(this, Main);
+	        _classCallCheck(this, Galaxy);
 	
-	        _Ticker2.default.start();
-	
-	        this.styleHeader();
-	
-	        this.canvas1 = new _Canvas2.default({ id: 'galaxy1' });
-	        this.canvas2 = new _Canvas2.default({ id: 'galaxy2' });
+	        this.canvas1 = new _Canvas2.default("galaxy1");
+	        this.canvas2 = new _Canvas2.default("galaxy2");
 	        this.canvasEl1 = this.canvas1.getEl();
 	        this.canvasEl2 = this.canvas2.getEl();
 	
@@ -95,27 +287,25 @@
 	        this.mouseX = 0;
 	        this.mouseY = 0;
 	
-	        new _Starfield2.default({ canvas: this.canvas1 });
-	        new _Starfield2.default({ canvas: this.canvas2 });
+	        new _Starfield2.default({
+	            canvas: this.canvas1,
+	            count: Math.round(window.innerWidth / 8)
+	        });
+	        new _Starfield2.default({
+	            canvas: this.canvas2,
+	            count: Math.round(window.innerWidth / 8)
+	        });
 	
-	        window.addEventListener('mousemove', function (e) {
+	        window.addEventListener("mousemove", function (e) {
 	            _this.mouseX = e.clientX - window.innerWidth / 2;
 	            _this.mouseY = e.clientY - window.innerHeight / 2;
 	        }, false);
 	
-	        document.addEventListener('ontick', this.update.bind(this));
+	        this.update = this.update.bind(this);
+	        document.addEventListener('ontick', this.update, false);
 	    }
 	
-	    _createClass(Main, [{
-	        key: 'styleHeader',
-	        value: function styleHeader() {
-	            var universe = document.getElementById("universe");
-	            var viewportHeight = window.innerHeight;
-	
-	            universe.style.height = viewportHeight + 'px';
-	            //
-	        }
-	    }, {
+	    _createClass(Galaxy, [{
 	        key: 'update',
 	        value: function update() {
 	            this.attractor1.update(this.mouseX, this.mouseY);
@@ -132,16 +322,16 @@
 	        }
 	    }]);
 	
-	    return Main;
+	    return Galaxy;
 	}();
 	
-	new Main();
+	exports.default = Galaxy;
 
 /***/ },
-/* 1 */
+/* 5 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -152,110 +342,35 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 *
-	 */
-	
-	var Ticker = function () {
-	    function Ticker() {
-	        _classCallCheck(this, Ticker);
-	    }
-	
-	    _createClass(Ticker, null, [{
-	        key: 'start',
-	        value: function start() {
-	            this.update();
-	        }
-	    }, {
-	        key: 'pause',
-	        value: function pause() {
-	            this.paused = true;
-	        }
-	    }, {
-	        key: 'resume',
-	        value: function resume() {
-	            this.paused = false;
-	            this.start();
-	        }
-	    }, {
-	        key: 'update',
-	        value: function update() {
-	            if (this.paused) {
-	                return;
-	            }
-	
-	            document.dispatchEvent(this.event);
-	            this.ticks++;
-	
-	            window.requestAnimationFrame(this.update.bind(this));
-	        }
-	    }]);
-	
-	    return Ticker;
-	}();
-	
-	// static props
-	
-	
-	exports.default = Ticker;
-	Ticker.paused = false;
-	Ticker.ticks = 0;
-	Ticker.event = new CustomEvent('ontick', {
-	    detail: {
-	        ticks: Ticker.ticks
-	    }
-	});
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 *
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
 	 */
 	
 	var Canvas = function () {
-	    function Canvas(options) {
+	    function Canvas(id) {
 	        _classCallCheck(this, Canvas);
 	
-	        this.options = {
-	            id: 'canvas',
-	            handleResize: true
-	        };
-	
-	        this.options = Object.assign(this.options, options || {});
-	
-	        this.el = document.querySelector('#' + this.options.id);
+	        this.el = document.getElementById(id);
 	        this.context = this.el.getContext('2d');
 	
-	        if (this.options.handleResize) {
-	            window.addEventListener('resize', this.handleResize.bind(this), false);
-	            this.handleResize();
-	        }
+	        this.handleResize = this.handleResize.bind(this);
+	        window.addEventListener("resize", this.handleResize, false);
+	        this.handleResize();
 	    }
 	
 	    _createClass(Canvas, [{
-	        key: 'handleResize',
+	        key: "handleResize",
 	        value: function handleResize() {
 	            this.el.width = window.innerWidth;
 	            this.el.height = window.innerHeight;
 	        }
 	    }, {
-	        key: 'getEl',
+	        key: "getEl",
 	        value: function getEl() {
 	            return this.el;
 	        }
 	    }, {
-	        key: 'getContext',
+	        key: "getContext",
 	        value: function getContext() {
 	            return this.context;
 	        }
@@ -267,27 +382,29 @@
 	exports.default = Canvas;
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	
-	var _Star = __webpack_require__(4);
+	var _Star = __webpack_require__(7);
 	
 	var _Star2 = _interopRequireDefault(_Star);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
+	 */
 	
 	var Starfield = function () {
 	    function Starfield(options) {
@@ -300,22 +417,24 @@
 	        };
 	
 	        this.stars = null;
+	
 	        this.options = Object.assign(this.options, options || {});
 	
 	        this.populateField();
 	
 	        if (this.options.handleResize) {
-	            window.addEventListener('resize', this.handleResize.bind(this), false);
+	            this.handleResize = this.handleResize.bind(this);
+	            window.addEventListener("resize", this.handleResize, false);
 	        }
 	    }
 	
 	    _createClass(Starfield, [{
-	        key: 'handleResize',
+	        key: "handleResize",
 	        value: function handleResize() {
 	            this.populateField();
 	        }
 	    }, {
-	        key: 'populateField',
+	        key: "populateField",
 	        value: function populateField() {
 	            var count = this.options.count;
 	
@@ -326,6 +445,7 @@
 	                this.stars.push(new _Star2.default({
 	                    x: Math.random() * window.innerWidth,
 	                    y: Math.random() * window.innerHeight,
+	                    randRGBMin: 212,
 	                    canvas: this.options.canvas,
 	                    radius: Math.round(Math.random() * 4),
 	                    opacity: 0.5 + Math.round((Math.random() - 0.5) * 100) / 100
@@ -335,7 +455,7 @@
 	            this.render();
 	        }
 	    }, {
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            var context = this.options.canvas.getContext();
 	
@@ -376,7 +496,7 @@
 	exports.default = Starfield;
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -390,15 +510,11 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 *
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
 	 */
 	
 	var Star = function () {
-	    /**
-	     * [constructor description]
-	     * @param  {[type]} options [description]
-	     */
-	
 	    function Star(options) {
 	        _classCallCheck(this, Star);
 	
@@ -463,7 +579,7 @@
 	exports.default = Star;
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -477,7 +593,8 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	/**
-	 *
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
 	 */
 	
 	var Attractor = function () {

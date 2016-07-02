@@ -25,48 +25,24 @@ Quick">
     <link rel="icon" href="/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/styles/main.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 
 </head>
 <body>
-  <div class="mobile-nav-panel">
-    <i class="icon-reorder icon-large"></i>
-</div>
+  <section id="static_background">
+    <canvas id="galaxy1" class="galaxy"></canvas>
+    <canvas id="galaxy2" class="galaxy"></canvas>
+</section>
 <header id="header">
-    <div id="universe" class="universe">
-        <canvas id="galaxy1" class="galaxy"></canvas>
-        <canvas id="galaxy2" class="galaxy"></canvas>
-
-        <div id="logo" class="logo">
-            <svg version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="260"
-                 viewBox="0 0 200 260" overflow="visible" enable-background="new 0 0 200 260" xml:space="preserve">
-                <g id="logoGroup">
-                    <polygon class="logo-piece logo-piece-nw" fill="#4F595B" points="80,40 0,80 0,120 80,80"/>
-                    <polygon class="logo-piece logo-piece-sw" fill="#8A989F" points="100,130 0,80 0,120 100,169"/>
-                    <polygon class="logo-piece logo-piece-se" fill="#4F595B" points="100,110 200,60 200,100 100,149"/>
-                    <rect x="80" y="31" fill="#8A989F" width="39" height="228"/>
-                    <polygon class="logo-piece logo-piece-ne" fill="#8A989F" points="80,0 199,60 199,100 80,40"/>
-                </g>
-            </svg>
-        </div>
-
-        <h1 class="blog-title">
-            <a href="/">forward/slash</a>
-        </h1>
-        <nav class="nav">
-            <ul>
-                <li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
-                <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-                <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-            </ul>
-        </nav>
-        <div id="search-form-wrap">
-            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://c-concat-p.js.org"></form>
-        </div>
+    <h1 class="blog-title">
+        <a href="/">forward/slash</a>
+    </h1>
+    <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://c-concat-p.js.org"></form>
     </div>
 </header>
+
   <div id="container">
     <div id="main" class="main">
       <article id="post-hello-world" class="post">
@@ -126,21 +102,22 @@ Quick">
 
 
     </div>
-    <div id="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:c-concat-p.js.org">
-  </form>
-</div>
-<footer id="footer">
-	<h1 class="footer-blog-title">
-		<a href="/">forward/slash</a>
-	</h1>
+    <footer id="footer">
 	<span class="copyright">
 		&copy; 2016 Chris Peters<br>
-		Theme forked from <a href="//github.com/joyceim/hexo-theme-apollo" target="_blank">Apollo</a><br>
+		Theme <a href="//github.com/c-concat-p/hexo-theme-apollo-soyuz" target="_blank">Apollo-Soyuz</a> forked from <a href="//github.com/joyceim/hexo-theme-apollo" target="_blank">Apollo</a><br>
 		Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
 	</span>
+    <nav class="nav">
+        <ul>
+            <li><a href="">Home</a></li><li><a href="">Archives</a></li>
+            <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+            <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+        </ul>
+    </nav>
+    <div class="mobile-nav-panel">
+        <i class="icon-reorder icon-large">&plus;</i>
+    </div>
 </footer>
     
 
