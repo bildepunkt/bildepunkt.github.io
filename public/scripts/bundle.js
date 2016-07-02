@@ -272,15 +272,21 @@
 	
 	        this.canvas1 = new _Canvas2.default("galaxy1");
 	        this.canvas2 = new _Canvas2.default("galaxy2");
+	        this.canvas3 = new _Canvas2.default("galaxy3");
 	        this.canvasEl1 = this.canvas1.getEl();
 	        this.canvasEl2 = this.canvas2.getEl();
+	        this.canvasEl3 = this.canvas3.getEl();
 	
 	        this.attractor1 = new _Attractor2.default({
-	            magnitude: -0.08,
+	            magnitude: -0.012,
 	            drag: 12
 	        });
 	        this.attractor2 = new _Attractor2.default({
-	            magnitude: -0.04,
+	            magnitude: -0.06,
+	            drag: 12
+	        });
+	        this.attractor3 = new _Attractor2.default({
+	            magnitude: -0.02,
 	            drag: 12
 	        });
 	
@@ -289,11 +295,15 @@
 	
 	        new _Starfield2.default({
 	            canvas: this.canvas1,
-	            count: Math.round(window.innerWidth / 8)
+	            count: Math.round(window.innerWidth / 32)
 	        });
 	        new _Starfield2.default({
 	            canvas: this.canvas2,
-	            count: Math.round(window.innerWidth / 8)
+	            count: Math.round(window.innerWidth / 16)
+	        });
+	        new _Starfield2.default({
+	            canvas: this.canvas3,
+	            count: Math.round(window.innerWidth / 4)
 	        });
 	
 	        window.addEventListener("mousemove", function (e) {
@@ -310,15 +320,20 @@
 	        value: function update() {
 	            this.attractor1.update(this.mouseX, this.mouseY);
 	            this.attractor2.update(this.mouseX, this.mouseY);
+	            this.attractor3.update(this.mouseX, this.mouseY);
 	
 	            var t1 = this.attractor1.getTarget();
 	            var t2 = this.attractor2.getTarget();
+	            var t3 = this.attractor3.getTarget();
 	
 	            this.canvasEl1.style.left = t1.x + 'px';
 	            this.canvasEl1.style.top = t1.y + 'px';
 	
 	            this.canvasEl2.style.left = t2.x + 'px';
 	            this.canvasEl2.style.top = t2.y + 'px';
+	
+	            this.canvasEl3.style.left = t3.x + 'px';
+	            this.canvasEl3.style.top = t3.y + 'px';
 	        }
 	    }]);
 	

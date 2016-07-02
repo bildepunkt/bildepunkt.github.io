@@ -9,6 +9,7 @@ description:
 author: Chris Peters
 language: en
 timezone: America/Vancouver
+disqus_shortname: c-concat-p
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -74,3 +75,9 @@ deploy:
   message: 
   name: c-concat-p
   email: c.concat.p@gmail.com
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
