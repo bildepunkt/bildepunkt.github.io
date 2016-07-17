@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: c-concat-p
+title: bildepunkt
 subtitle: code, design, \m/, etc.
-description: I am a web developer located in Vancouver, BC Canada. I specialize in maintainable, extensible javascript, HTML5, CSS3, interactive design, single page apps, and responsive design.
+description: I am a software developer located in Vancouver, BC Canada. I specialize in maintainable, extensible enterprise application development, interactive design, single page apps, and responsive design.
 author: Chris Peters
 language: en
 timezone: America/Vancouver
@@ -13,7 +13,7 @@ disqus_shortname: c-concat-p
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://c-concat-p.js.org
+url: http://bildepunkt.js.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults: 
@@ -70,11 +70,11 @@ theme: apollo-soyuz
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/c-concat-p/c-concat-p.github.io.git
+  repo: https://github.com/bildepunkt/bildepunkt.github.io.git
   branch: master
   message: 
-  name: c-concat-p
-  email: c.concat.p@gmail.com
+  name: bildepunkt
+  email: bildepunkt@gmail.com
 
 feed:
   type: atom
