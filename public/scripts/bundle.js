@@ -62,12 +62,23 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function scrollToArticle(delta) {
+	    if (delta < window.innerHeight) {
+	        window.scrollTo(0, delta);
+	    }
+	}
+	
 	window.onload = function () {
 	    new _Ticker2.default();
 	
+	    var logo = document.getElementById("logo");
 	    var header = document.getElementById("header");
 	    var staticBg = document.getElementById("static_background");
 	    var vpHeight = window.innerHeight + "px";
+	
+	    logo.addEventListener("click", function () {
+	        document.location.href = "/";
+	    }, false);
 	
 	    header.style.height = vpHeight;
 	    staticBg.style.height = vpHeight;
@@ -77,6 +88,10 @@
 	    new _Tween2.default(document.body.style, "opacity", 0, 1, 1000, _easing.easeOut);
 	
 	    new _Galaxy2.default();
+	
+	    if (document.location.pathname !== "/" && window.scrollY === 0) {
+	        new _Tween2.default(scrollToArticle, 0, window.innerHeight - 32, 1000, _easing.easeOut);
+	    }
 	};
 
 /***/ },
@@ -154,13 +169,23 @@
 	    function Tween(entity, prop, start, end, ms, easing, onComplete) {
 	        _classCallCheck(this, Tween);
 	
-	        this.entity = entity;
-	        this.prop = prop;
-	        this.start = start;
-	        this.end = end;
-	        this.ms = ms;
-	        this.easing = easing;
-	        this.onComplete = onComplete;
+	        if (typeof entity === "function") {
+	            this.callback = entity;
+	            this.start = prop;
+	            this.end = start;
+	            this.ms = end;
+	            this.easing = ms;
+	            this.onComplete = easing;
+	        } else {
+	            this.entity = entity;
+	            this.prop = prop;
+	            this.start = start;
+	            this.end = end;
+	            this.ms = ms;
+	            this.easing = easing;
+	            this.onComplete = onComplete;
+	        }
+	
 	        this.currentFrame = 0;
 	        this.totalFrames = Math.round(this.ms / (1000 / 60));
 	
@@ -177,7 +202,11 @@
 	        key: "update",
 	        value: function update() {
 	            if (this.currentFrame < this.totalFrames) {
-	                this.entity[this.prop] = this.easing(this.currentFrame, this.start, this.end, this.totalFrames);
+	                if (typeof this.callback === "function") {
+	                    this.callback(this.easing(this.currentFrame, this.start, this.end, this.totalFrames));
+	                } else {
+	                    this.entity[this.prop] = this.easing(this.currentFrame, this.start, this.end, this.totalFrames);
+	                }
 	            } else {
 	                if (this.onComplete) {
 	                    this.onComplete();
@@ -278,15 +307,15 @@
 	        this.canvasEl3 = this.canvas3.getEl();
 	
 	        this.attractor1 = new _Attractor2.default({
-	            magnitude: -0.012,
-	            drag: 12
-	        });
-	        this.attractor2 = new _Attractor2.default({
 	            magnitude: -0.06,
 	            drag: 12
 	        });
+	        this.attractor2 = new _Attractor2.default({
+	            magnitude: -0.03,
+	            drag: 12
+	        });
 	        this.attractor3 = new _Attractor2.default({
-	            magnitude: -0.02,
+	            magnitude: -0.012,
 	            drag: 12
 	        });
 	
