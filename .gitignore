@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # sys
 .DS_Store
 
@@ -8,3 +9,12 @@ node_modules
 # hexo
 .deploy-git
 public
+=======
+.DS_Store
+node_modules
+contents/
+plugins/
+templates/
+config.json
+package.json
+>>>>>>> d67ddc2... winterbuild
