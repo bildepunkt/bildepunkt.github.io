@@ -1,7 +1,3 @@
 .DS_Store
 node_modules
-contents/
-plugins/
-templates/
-config.json
-package.json
+build/
