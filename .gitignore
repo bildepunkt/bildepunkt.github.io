@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-# sys
-.DS_Store
-
-# npm
-node_modules
-*.log
-
-# hexo
-.deploy-git
-public
-=======
 .DS_Store
 node_modules
-<<<<<<< HEAD
-contents/
-plugins/
-templates/
-config.json
-package.json
->>>>>>> d67ddc2... winterbuild
-=======
 build/
->>>>>>> e456d88... porting to ws
