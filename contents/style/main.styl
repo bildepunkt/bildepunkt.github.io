@@ -1,0 +1,33 @@
+
+@import "variables"
+
+@import "galaxy"
+@import "header"
+@import "content"
+@import "article"
+@import "footer"
+
+body
+    font-family: $sans
+    line-height: 1.52
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    background-color: $col-bg
+    color: $col-fg
+
+a, a:visited
+    color: $col-fg
+    text-decoration: underline
+
+a:hover
+    color: $col-accent
+    text-decoration: underline
+
+@media (min-width: $tablet-width)
+    body
+        font-size: 22px
+
+@media (min-width: $mobile-width) and (max-width: $tablet-width - 1)
+    body
+        font-size: 18px

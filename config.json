@@ -3,10 +3,12 @@
     "url": "http://bildepunkt.com",
     "name": "bildepunkt",
     "owner": "Chris Peters",
-    "description": "{ code, space, general geekery }"
+    "description": "{ a microcosm of geekery }"
   },
   "plugins": [
-    "./plugins/paginator.coffee"
+    "./plugins/paginator.coffee",
+    "./node_modules/wintersmith-babel",
+    "./node_modules/wintersmith-stylus"
   ],
   "require": {
     "moment": "moment",

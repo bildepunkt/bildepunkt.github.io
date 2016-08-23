@@ -1,0 +1,18 @@
+div#galaxy
+    canvas.starfield#starfield1
+    canvas.starfield#starfield2
+
+header
+    div.logo
+        svg(version="1.1" xmlns="&amp;ns_svg;" xmlns:xlink="&amp;ns_xlink;" width="160" height="208" viewBox="0 0 200 260" overflow="visible" enable-background="new 0 0 200 260" xml:space="preserve")
+            g
+                polygon(fill="#475b64" points="80,40 0,80 0,120 80,80" class="logo-piece logo-piece-nw")
+                polygon(fill="#7e94a0" points="100,130 0,80 0,120 100,169" class="logo-piece logo-piece-sw")
+                polygon(fill="#475b64" points="100,110 200,60 200,100 100,149" class="logo-piece logo-piece-se")
+                rect(x="80" y="31" fill="#7e94a0" width="39" height="228")
+                polygon(fill="#7e94a0" points="80,0 199,60 199,100 80,40" class="logo-piece logo-piece-ne")
+
+    div.title
+        h1
+            a(href="http://bildepunkt.com")= locals.name
+        p.description= locals.description

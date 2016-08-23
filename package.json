@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "font-awesome-stylus": "^4.6.2",
     "moment": "2.3.x",
+    "typogr": "0.5.x",
     "underscore": "1.4.x",
-    "typogr": "0.5.x"
+    "wintersmith-babel": "^0.1.1",
+    "wintersmith-stylus": "^0.5.1"
   },
   "private": "true"
 }

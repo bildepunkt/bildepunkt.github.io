@@ -1,0 +1,18 @@
+
+#content
+    position: relative
+
+@media (min-width: $desktop-width)
+    #content
+        .content-wrap
+            margin: 0 256px
+
+@media (max-width: $desktop-width - 1) and (min-width: $tablet-width)
+    #content
+        .content-wrap
+            margin: 0 128px
+
+@media (max-width: $tablet-width - 1)
+    #content
+        .content-wrap
+            margin: 0 32px

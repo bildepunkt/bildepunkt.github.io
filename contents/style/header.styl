@@ -1,0 +1,110 @@
+
+$width = 160
+$height = 208
+$start-top = -($height / 2)px
+$end-top = -($height)px
+    
+header.header
+    text-align: center
+    position: relative
+    height: 100%
+    width: 100%
+    
+    .logo
+        left: 50%
+        top: 50%
+        margin-left: -($width / 2)px
+        margin-top: $end-top
+        animation-duration: 1s
+        animation-name: slidein
+        cursor: pointer
+        position: absolute
+        
+        .logo-piece-nw
+            transition: all
+            animation-duration: 0.6s
+            animation-name: movein-nw
+
+        .logo-piece-sw
+            animation-duration: 0.7s
+            animation-name: movein-sw
+
+        .logo-piece-se
+            animation-duration: 0.8s
+            animation-name: movein-se
+
+        .logo-piece-ne
+            animation-duration: 0.9s
+            animation-name: movein-ne
+
+    .title 
+        position: absolute
+        width: 100%
+        top: 50%
+        
+        h1 
+            font-family: $sans
+            letter-spacing: 0.08em
+            font-size: 56px
+            margin: 8px 0 -16px
+            animation-name: title-in
+            animation-duration: 0.8s
+            
+            a, a:visited, a:hover
+                color: $col-accent-sec
+                text-decoration: none
+         
+        .description
+            font-size: 24px
+            font-family: $serif
+            font-style: italic
+            color: $col-accent
+            animation-name: description-in
+            animation-duration: 0.8s
+
+@keyframes title-in
+    from
+        margin-left: -128px
+        opacity: 0
+    to
+        margin-left: 0
+        opacity: 1
+        
+@keyframes description-in
+    from
+        margin-left: 128px
+        opacity: 0
+    to
+        margin-left: 0
+        opacity: 1
+
+@keyframes movein-nw
+    from
+        transform: rotate(-60deg)
+    to
+        transform: rotate(0)
+@keyframes movein-sw
+    from
+        transform: rotate(60deg)
+    to
+        transform: rotate(0)
+@keyframes movein-se
+    from
+        transform: rotate(30deg)
+    to
+        transform: rotate(0)
+@keyframes movein-ne
+    from
+        transform: rotate(-30deg)
+    to
+        transform: rotate(0)
+
+@keyframes slidein
+    0%
+        margin-top: $start-top
+        opacity: 0
+    75%
+        opacity: 1
+    100%
+        margin-top: $end-top
+      
