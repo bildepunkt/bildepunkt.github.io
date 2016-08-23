@@ -1,4 +1,4 @@
+bildepunkt site
+===============
 
-# Blog
-
-The default [wintersmith](https://github.com/jnordberg/wintersmith) template
+My portfolio site and blog.
