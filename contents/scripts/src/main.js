@@ -256,6 +256,8 @@ function init () {
     new Header(q("header"));
     new Ticker();
     new Galaxy();
+
+    document.body.className += " all-systems-go";
 }
 
 init();

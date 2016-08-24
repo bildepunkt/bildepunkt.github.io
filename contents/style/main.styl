@@ -7,14 +7,28 @@
 @import "article"
 @import "footer"
 
+html
+    background-color: $col-bg
+    height: 100%
+    min-height: 100%
+
 body
     font-family: $sans
     line-height: 1.52
     text-rendering: optimizeLegibility
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
     background-color: $col-bg
+    height: 100%
     color: $col-fg
+    opacity: 0
+    transition: opacity 0.5s ease
+    -webkit-transition: opacity 0.5s ease
+    -moz-transition: opacity 0.5s ease
+    -ms-transition: opacity 0.5s ease
+    -o-transition: opacity 0.5s ease
+
+    &.all-systems-go
+        opacity: 1
+
 
 a, a:visited
     color: $col-fg
@@ -23,11 +37,3 @@ a, a:visited
 a:hover
     color: $col-accent
     text-decoration: underline
-
-@media (min-width: $tablet-width)
-    body
-        font-size: 22px
-
-@media (min-width: $mobile-width) and (max-width: $tablet-width - 1)
-    body
-        font-size: 18px

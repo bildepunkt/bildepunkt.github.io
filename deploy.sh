@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # pre-commit so we don't fuck ourselves
 git add -A;
