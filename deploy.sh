@@ -6,7 +6,7 @@ git commit -m "`date +%Y%m%d_%H%M%S`-prebuild";
 
 wintersmith build;
 
-git checkout --orphan build;
+git checkout build || git checkout --orphan build;
 #git rm -r --cached .;
 
 rm .gitignore;
@@ -18,5 +18,5 @@ git push -f origin build:master;
 
 # clean up
 #git clean -fd;
-#git checkout master;
-#git branch -D build;
+#git checkout dev;
+git branch -D build;
