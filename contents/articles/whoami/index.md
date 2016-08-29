@@ -10,4 +10,5 @@ Hello, my name is Chris. I am a software developer from Vancouver BC. My first p
 &nbsp;  
 Believe it or not, I do have a life outside of programming. Although I spend way to much of my spare time writing code. I am also a dad and husband, a Brazillian Jiu Jitsu practitioner, a rather shoddy vegetarian, a drummer and a graphic design enthusiast.    
 &nbsp;  
-Most articles in this blog will be on programming and other technical geekery, but my other interests might creep in too.
+Most articles in this blog will be on programming and other technical geekery, but my other interests might creep in too.  
+&nbsp;
