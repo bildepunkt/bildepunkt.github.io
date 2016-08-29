@@ -3,7 +3,9 @@
     "url": "http://bildepunkt.com",
     "name": "bildepunkt",
     "owner": "Chris Peters",
-    "description": "{ a microcosm of geekery }"
+    "description": "{ a microcosm of geekery }",
+    "metaDescription": "Software development blog and portfolio site of Chris Peters.",
+    "gaTracking": "UA-80200669-1"
   },
   "plugins": [
     "./plugins/paginator.coffee",
