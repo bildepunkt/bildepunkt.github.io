@@ -3,7 +3,7 @@ title: "Mission: Juno"
 author: bildepunkt
 date: 2016-07-17
 template: article.jade
-keywords: space, juno mission
+tags: space, juno mission
 ---
 
 The ISS is incredible but I don't give it a lot of thought. Missions like [New Horizons](https://www.nasa.gov/mission_pages/newhorizons/main/index.html), [Rosetta](https://www.nasa.gov/rosetta), [Curiosity](https://www.nasa.gov/mission_pages/msl/index.html), however, get me jazzed like a Billy Cobham drum solo. And the [Juno](https://www.nasa.gov/mission_pages/juno/main/index.html) mission is no exception.   

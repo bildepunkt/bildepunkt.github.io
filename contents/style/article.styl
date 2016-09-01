@@ -1,4 +1,6 @@
 
+$meta-font-size = 16px
+
 article.article
     font-family: $article-font
     letter-spacing: .01rem
@@ -18,13 +20,34 @@ article.article
             font-size: 32px
             a
                 text-decoration: none
-        .date
-            fa(clock-o)
-            color: $col-accent
-            font-size: 16px
 
-            &:before
-                font-size: 14px
+    .metadata
+        color: $col-accent
+        font-family: $sans
+
+        a
+            color: $col-accent
+            text-decoration: none
+
+            &:hover
+                color: $col-accent-sec
+
+        &:before
+            font-size: $meta-font-size - 2
+
+        &.date
+            fa(clock-o)
+
+            span
+                font-size: $meta-font-size
+
+        &.tags
+            margin-left: 16px
+            fa(tag)
+
+            span
+                font-size: $meta-font-size
+
 
 @media (min-width: $mobile-width)
     article.article

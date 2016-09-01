@@ -16,6 +16,14 @@ block content
   p.author
     | #{ 'Written by ' }
     mixin author(page.metadata.author)
+
+  p.metadata.tags
+    - var tags = env.helpers.getTagsFromArticle(page)
+    each tag in tags
+      span
+        a.tag(href=env.helpers.getTagHome(tag).url)= tag
+        &nbsp;
+
   article.article
     section.content!= typogr(page.html).typogrify()
 
