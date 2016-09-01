@@ -10,6 +10,7 @@
   "plugins": [
     "./plugins/paginator.coffee",
     "./node_modules/wintersmith-stylus",
+    "./node_modules/wintersmith-tag",
     "./node_modules/wintersmith-webpack-babel"
   ],
   "require": {
