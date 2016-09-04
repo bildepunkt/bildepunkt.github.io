@@ -13,6 +13,7 @@ html(lang='en')
           = locals.name
       link(rel='alternate', href=locals.url+'/feed.xml', type='application/rss+xml', title=locals.description)
       link(rel='stylesheet', href=contents.css['reset.css'].url)
+      link(rel='stylesheet', href=contents.css['code.css'].url)
       link(rel='stylesheet', href="/style/main.css")
   body(class=bodyclass)
     header.header
