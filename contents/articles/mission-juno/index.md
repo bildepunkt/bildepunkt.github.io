@@ -7,8 +7,9 @@ tags: space, juno mission
 ---
 
 The ISS is incredible but I don't give it a lot of thought. Missions like [New Horizons](https://www.nasa.gov/mission_pages/newhorizons/main/index.html), [Rosetta](https://www.nasa.gov/rosetta), [Curiosity](https://www.nasa.gov/mission_pages/msl/index.html), however, get me jazzed like a Billy Cobham drum solo. And the [Juno](https://www.nasa.gov/mission_pages/juno/main/index.html) mission is no exception.   
-&nbsp;    
+
 ##    
+
 I love the mystery of space, and the possibility of life-changing findings in our own solar system. My 8 year-old often points to the sky and reminds me of the three lego figures floating 588,000,000 kilometers away in Juno's radioactively-shielded core.    
 &nbsp;    
 Seeing as I will likey never contribute to a space mission directly, I figured the next best thing would be to write some code to express mah feels: I give thee *Juno on Canvas*! The entire image is rendered procedurally via the canvas' various drawing apis. I'm hoping to add some interaction, stats, and Jupiter itself into this piece sometime in the future.    

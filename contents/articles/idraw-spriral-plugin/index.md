@@ -7,13 +7,13 @@ tags: idraw, spiral
 ---
 
 I decided to invested in [iDraw](http://www.indeeo.com/) (now called _Graphic_) a few years ago when I was in need of a vector drawing program and no longer had access to an Adobe license. I am pretty happy with it (even since it's aquisition by Autodesk), but it lacks a many of the non-basic tools that I just assume will be around, so imagine my mild dismay when I wanted to add a spiral and realised, alas, there is no spiral tool! It was mild indeed because my next thought was: "Cool, I get to write one!" thanks to iDraw's handy [plugin feature](http://www.indeeo.com/idraw/plugins/api).  
-&nbsp;  
 
 ## Design imitating nature  
 > a spiral is a curve which emanates from a point, moving farther away as it revolves around the point.  
 &mdash; Wikipedia  
 
 &nbsp;  
+
 There are many ways a spiral can be drawn programmatically (contiguous right angle approximation etc.) but but for the sake of performance, editability, and iDraw's developer API I decided to express the segments with bezier curves.  
 &nbsp;  
 
@@ -83,7 +83,7 @@ drawSegments () {
 
 ## The Plugin
 
-Well, you've made it this far. I'm impressed. I wouldn't want to have to slog throught all of this... The plugin code is very similar to the demo except for a few globals like the activeDocument object and the point class which are [well documented](http://www.indeeo.com/idraw/plugins/api).  
+Well, you've made it this far. I'm impressed. I wouldn't want to have to slog throught all of this... The plugin code is very similar to the demo except for a few globals like the activeDocument object and the point class which are [well documented](http://www.indeeo.com/idraw/plugins/api). Happy vectoring!  
 &nbsp;  
 
 ```javascript

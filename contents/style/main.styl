@@ -29,18 +29,26 @@ body
     &.all-systems-go
         opacity: 1
 
-    em
-        font-style: italic
-        //font-family: $serif
+em
+    font-style: italic
+    //font-family: $serif
 
-    strong
-        font-weight: 800
+strong
+    font-weight: 800
+
+blockquote
+    border-left: 4px solid $col-accent
+    font-style: italic
+    font-family: $serif
+    color: $col-accent
+    padding-left: 36px
 
 a, a:visited
+    transition: color 0.2s ease
     color: $col-fg
     text-decoration: underline
 
-a:hover
+a:hover, a:active
     color: $col-accent
     text-decoration: underline
 
