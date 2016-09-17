@@ -24,34 +24,6 @@ article.article
             a
                 text-decoration: none
 
-        .metadata
-            color: $col-accent
-
-            a
-                color: $col-accent
-                text-decoration: none
-
-                &:hover
-                    color: $col-accent-sec
-
-            &:before
-                font-size: $meta-font-size - 2
-
-            &.date
-                fa(clock-o)
-
-                span
-                    font-size: $meta-font-size
-                    font-family: $sans
-
-            &.tags
-                margin-left: $meta-font-size
-                fa(tags)
-
-                span
-                    font-size: $meta-font-size
-                    font-family: $sans
-
     .content h2
         margin: 16px 0;
         font-size: 32px
@@ -59,15 +31,44 @@ article.article
 
     .more
         margin-top: 12px
-        text-align: center
         font-family: $sans
 
         a
-            text-decoration: none
             color: $col-accent
 
             &:hover, &:active
                 color: $col-accent-sec
+
+article.article, .content-wrap
+    .metadata
+        color: $col-accent
+        margin: 0 12px 16px 0
+
+        a
+            color: $col-accent
+            text-decoration: none
+
+            &:hover
+                color: $col-accent-sec
+
+        &:before
+            font-size: $meta-font-size - 2
+
+        &.date
+            fa(clock-o)
+
+            span
+                margin-left: 8px
+                font-size: $meta-font-size
+                font-family: $sans
+
+        &.tags
+            fa(tags)
+
+            .tag
+                font-size: $meta-font-size
+                font-family: $sans
+                margin-left: 8px
 
 
 @media (min-width: $mobile-width)

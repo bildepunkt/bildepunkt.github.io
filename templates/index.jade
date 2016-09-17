@@ -9,18 +9,18 @@ block content
         h2
           a(href=article.url)= article.title
 
-        p.metadata.date &nbsp;&nbsp;
+        p.metadata.date
           span= moment.utc(article.date).format('DD MMMM, YYYY')
 
         - var tags = env.helpers.getTagsFromArticle(article)
           if tags.length
             p.metadata.tags
               each tag in tags
-                span.tag &nbsp;&nbsp;
+                span.tag
                   a(href=env.helpers.getTagHome(tag).url)= tag
 
       section.content
-        if article.intro.length > 0
+        if article.intro.length
           != typogr(article.intro).typogrify()
         if article.hasMore
           p.more

@@ -123,5 +123,4 @@ function init() {
 }
 
 init()
-```  
-&nbsp;  
+```

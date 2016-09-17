@@ -1,8 +1,15 @@
 
 mixin author(authorName)
-  - var author = contents.authors[authorName + '.json'];
-  span.author
-    if author
-      a(href='mailto:' + author.metadata.email)= author.metadata.name
-    else
-      = authorName
+    - var author = contents.authors[authorName + '.json'];
+    - var imgSize = 96;
+    div.author
+        img(src=author.metadata.src, width=imgSize, height=imgSize)
+        div.text
+            p.name
+                if author
+                    a(href='mailto:' + author.metadata.email)= author.metadata.name
+                else
+                    = authorName
+
+            p.bio
+                = author.metadata.bio
