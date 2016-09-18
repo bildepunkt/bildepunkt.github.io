@@ -15,7 +15,9 @@ git add CNAME articles/ css/ images/ scripts/ style/ tag/ feed.xml index.html;
 
 # skips push and stays on branch for development
 if [ "$1" = "dev" ]; then
-    echo "skipped push!"
+    echo
+    echo "-+-+- premature stoppage! -+-+-"
+    echo
     exit 0;
 fi
 
