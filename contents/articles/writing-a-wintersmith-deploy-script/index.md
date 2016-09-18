@@ -44,7 +44,7 @@ git push -f origin production:gh-pages;
 # clean up
 git checkout development;
 git branch -D production;
-git clean -id
+git clean -id;
 ```  
 &nbsp;  
 
