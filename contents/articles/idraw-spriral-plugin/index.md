@@ -3,7 +3,7 @@ title: "iDraw Spiral Plugin"
 author: bildepunkt
 date: 2016-09-01
 template: article.jade
-tags: idraw, spiral
+tags: idraw, spiral, javascript
 ---
 
 I decided to invested in [iDraw](http://www.indeeo.com/) (now called _Graphic_) a few years ago when I was in need of a vector drawing program and no longer had access to an Adobe license. I am pretty happy with it (even since it's aquisition by Autodesk), but it lacks a many of the non-basic tools that I just assume will be around, so imagine my mild dismay when I wanted to add a spiral and realised, alas, there is no spiral tool! It was mild indeed because my next thought was: "Cool, I get to write one!" thanks to iDraw's handy [plugin feature](http://www.indeeo.com/idraw/plugins/api).  

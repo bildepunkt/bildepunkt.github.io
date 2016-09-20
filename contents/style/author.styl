@@ -2,7 +2,7 @@ $img-size = 96
 
 .author
     //color: darken($col-fg, 16)
-    margin-bottom: 42px
+    margin-bottom: 48px
 
     img
         float: left
@@ -10,3 +10,23 @@ $img-size = 96
 
     .text
         margin-left: ($img-size + 12)px
+
+        .social
+            margin-top: 8px
+
+            span
+                margin-right: 12px
+
+            a
+                text-decoration: none
+                cursor: pointer
+                color: $col-accent
+
+            a:hover, a:active
+                color: $col-accent-sec
+
+            .twitter
+                fa(twitter)
+
+            .email
+                fa(envelope)
