@@ -1,4 +1,5 @@
 $img-size = 96
+$social-size = 148%
 
 .author
     //color: darken($col-fg, 16)
@@ -15,7 +16,7 @@ $img-size = 96
             margin-top: 8px
 
             span
-                margin-right: 12px
+                margin-right: 16px
 
             a
                 text-decoration: none
@@ -26,7 +27,13 @@ $img-size = 96
                 color: $col-accent-sec
 
             .twitter
-                fa(twitter)
+                fa(twitter-square)
+                font-size: $social-size
 
             .email
                 fa(envelope)
+                font-size: $social-size
+
+            .github
+                fa(github-square)
+                font-size: $social-size
