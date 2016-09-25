@@ -46,34 +46,87 @@
 
 	"use strict";
 
-	var _Header = __webpack_require__(1);
+	var _easing = __webpack_require__(1);
+
+	var _Header = __webpack_require__(2);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Ticker = __webpack_require__(2);
+	var _Ticker = __webpack_require__(3);
 
 	var _Ticker2 = _interopRequireDefault(_Ticker);
 
-	var _Galaxy = __webpack_require__(3);
+	var _Tween = __webpack_require__(4);
+
+	var _Tween2 = _interopRequireDefault(_Tween);
+
+	var _Galaxy = __webpack_require__(5);
 
 	var _Galaxy2 = _interopRequireDefault(_Galaxy);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function scrollToArticle(delta) {
+	    if (delta < window.innerHeight) {
+	        window.scrollTo(0, delta);
+	    }
+	}
+
 	function init() {
 	    var q = document.querySelector.bind(document);
+	    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
 	    new _Header2.default(q("header"));
 	    new _Ticker2.default();
 	    new _Galaxy2.default();
 
 	    document.body.className += " all-systems-go";
+
+	    if (scrollY === 0 && document.body.className.indexOf("article-detail") !== -1) {
+	        new _Tween2.default(scrollToArticle, 0, window.innerHeight - 32, 1000, _easing.easeOut);
+	    }
 	}
 
 	init();
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	/**
+	 * @param  {number} t current time
+	 * @param  {number} b start value
+	 * @param  {number} c change in value
+	 * @param  {number} d duration
+	 * @return {number}   the new position   
+	 */
+	var linear = exports.linear = function linear(t, b, c, d) {
+	    return c * t / d + b;
+	};
+
+	// quadradic
+	var easeIn = exports.easeIn = function easeIn(t, b, c, d) {
+	    t /= d;
+	    return c * t * t + b;
+	};
+
+	var easeOut = exports.easeOut = function easeOut(t, b, c, d) {
+	    t /= d;
+	    return -c * t * (t - 2) + b;
+	};
+
+	var easeInOut = exports.easeInOut = function easeInOut(t, b, c, d) {
+	    t /= d;
+	    return -c * t * (t - 2) + b;
+	};
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -112,7 +165,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -153,7 +206,90 @@
 	exports.default = Ticker;
 
 /***/ },
-/* 3 */
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * @copyright 2016 Chris Peters
+	 * @license ISC
+	 * @param {Any}      entity the entity to assign value to
+	 * @param {String}   prop   The entity's property name 
+	 * @param {Any}      from   initial value
+	 * @param {Any}      end    end value
+	 * @param {Integer}  ms     The length of the tween in milliseconds
+	 * @param {Function} easing The easing function
+	 */
+	var Tween = function () {
+	    function Tween(entity, prop, start, end, ms, easing, onComplete) {
+	        _classCallCheck(this, Tween);
+
+	        if (typeof entity === "function") {
+	            this.callback = entity;
+	            this.start = prop;
+	            this.end = start;
+	            this.ms = end;
+	            this.easing = ms;
+	            this.onComplete = easing;
+	        } else {
+	            this.entity = entity;
+	            this.prop = prop;
+	            this.start = start;
+	            this.end = end;
+	            this.ms = ms;
+	            this.easing = easing;
+	            this.onComplete = onComplete;
+	        }
+
+	        this.currentFrame = 0;
+	        this.totalFrames = Math.round(this.ms / (1000 / 60));
+
+	        this.update = this.update.bind(this);
+	        document.addEventListener("ontick", this.update, false);
+	    }
+
+	    _createClass(Tween, [{
+	        key: "isComplete",
+	        value: function isComplete() {
+	            return this.currentFrame >= this.totalFrames;
+	        }
+	    }, {
+	        key: "update",
+	        value: function update() {
+	            if (this.currentFrame < this.totalFrames) {
+	                if (typeof this.callback === "function") {
+	                    this.callback(this.easing(this.currentFrame, this.start, this.end, this.totalFrames));
+	                } else {
+	                    this.entity[this.prop] = this.easing(this.currentFrame, this.start, this.end, this.totalFrames);
+	                }
+	            } else {
+	                if (this.onComplete) {
+	                    this.onComplete();
+	                }
+
+	                document.removeEventListener("ontick", this.update, false);
+	            }
+
+	            this.currentFrame += 1;
+	        }
+	    }]);
+
+	    return Tween;
+	}();
+
+	exports.default = Tween;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -164,15 +300,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _Canvas = __webpack_require__(4);
+	var _Canvas = __webpack_require__(6);
 
 	var _Canvas2 = _interopRequireDefault(_Canvas);
 
-	var _Attractor = __webpack_require__(5);
+	var _Attractor = __webpack_require__(7);
 
 	var _Attractor2 = _interopRequireDefault(_Attractor);
 
-	var _Starfield = __webpack_require__(6);
+	var _Starfield = __webpack_require__(8);
 
 	var _Starfield2 = _interopRequireDefault(_Starfield);
 
@@ -243,7 +379,7 @@
 	exports.default = Galaxy;
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -291,7 +427,7 @@
 	exports.default = Canvas;
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -349,7 +485,7 @@
 	exports.default = Attractor;
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -360,7 +496,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _Star = __webpack_require__(7);
+	var _Star = __webpack_require__(9);
 
 	var _Star2 = _interopRequireDefault(_Star);
 
@@ -458,7 +594,7 @@
 	exports.default = Starfield;
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';

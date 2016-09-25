@@ -5,19 +5,12 @@ mixin author(authorName)
     div.author
         img(src=author.metadata.src, width=imgSize, height=imgSize)
         div.text
-            //- p.name
-            //-     if author
-            //-         a(href='mailto:' + author.metadata.email)= author.metadata.name
-            //-     else
-            //-         = authorName
-
             p.bio
                 = author.metadata.bio
-            
             div.social
                 span
                     a.twitter(href="//twitter.com/c_concat_p/")
                 span
-                    a.email(href="mailto:" + author.metadata.email)
-                span
                     a.github(href="//github.com/bildepunkt/")
+                span
+                    a.email(href="mailto:" + author.metadata.email)
