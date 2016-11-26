@@ -4,6 +4,13 @@ block vars
 html(lang='en')
   head
     block head
+      script(async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: 'ca-pub-5261542538507805',
+          enable_page_level_ads: true
+        });
+
       meta(charset='utf-8')
       meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
       meta(name='viewport', content='width=device-width')
@@ -16,13 +23,6 @@ html(lang='en')
       link(rel='stylesheet', href=contents.css['reset.css'].url)
       link(rel='stylesheet', href=contents.css['code.css'].url)
       link(rel='stylesheet', href="/style/main.css")
-
-      script(async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
-      script.
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: 'ca-pub-5261542538507805',
-          enable_page_level_ads: true
-        });
 
   body(class=bodyclass)
     header.header
