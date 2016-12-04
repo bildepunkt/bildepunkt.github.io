@@ -1,7 +1,5 @@
-@import "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|PT+Sans";
-
-$logo-width = 158
-$logo-height = 272
+$logo-width = 300
+$logo-height = 450
 $col-pink = #C9518A
 $col-green = #39B7C4
 $col-blue = #586086
@@ -9,11 +7,12 @@ $col-bg = #2F3238
 $col-fg = #b5c0c7
 
 @import "header"
-@import "content"
 @import "footer"
 
 html
   min-height: 100%
+  ::selection
+    background: $col-pink
 
   body
     margin: 0

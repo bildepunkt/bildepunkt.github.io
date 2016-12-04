@@ -10,17 +10,32 @@ header
     .logo
       left: 50%
       top: 50%
-      margin-top: -($logo-height)px
+      margin-top: -($logo-height - 100)px
       margin-left: -($logo-width / 2)px
       position: absolute
       animation: fade-down 1s
 
       .logo-poly
-        transition: all 1s
+        transition: all 2s
         cursor: pointer
 
         &:hover
           fill: white
+
+        &.b
+          animation: slide-down 0.4s
+        &.d
+          animation: slide-down 0.8s
+
+        &.a
+          animation: slide-up 0.4s
+        &.e
+          animation: slide-up 0.8s
+
+        &.c
+          animation: slide-left 0.4s
+        &.f
+          animation: slide-left 0.8s
 
     .title
       position: absolute
@@ -32,14 +47,20 @@ header
         color: $col-green
         font-family: "PT Sans"
         letter-spacing: 0.1em
-        font-size: 56px
-        
+        font-size: 64px
+
         a
           transition all 1.6s
           text-decoration: none
 
           &:hover
             color: $col-pink
+
+      .description
+        margin: -24px 16px 0
+        font-size: 28px
+        font-family: "Lora"
+        font-style: italic
           
       nav ul
         list-style: none
@@ -55,6 +76,24 @@ header
   
             &:hover
               color: $col-green
+
+@keyframes slide-down
+  0%
+    transform: translate(0, -96px)
+  100%
+    transform: translate(0, 0)
+
+@keyframes slide-up
+  0%
+    transform: translate(0, 96px)
+  100%
+    transform: translate(0, 0)
+
+@keyframes slide-left
+  0%
+    transform: translate(96px, 0)
+  100%
+    transform: translate(0, 0)
 
 @keyframes fade-down
   0%

@@ -1,10 +1,19 @@
 {
-  "dependencies": {
-    "moment": "2.3.x",
-    "typogr": "0.5.x",
-    "underscore": "1.4.x",
-    "wintersmith-babel": "^0.1.1",
-    "wintersmith-stylus": "^0.5.1"
+  "name": "bildepunkt.github.io",
+  "version": "1.0.0",
+  "description": "The development & design portfolio of Chris Peters",
+  "main": "index.html",
+  "scripts": {
+    "watch-styles": "./node_modules/.bin/stylus -w styles/main.styl -o build/main.css",
+    "watch-scripts": "./node_modules/.bin/babel -w scripts/main.js --out-file build/main.js --source-maps",
+    "watch-templates": "./node_modules/.bin/jade -w templates/index.jade -o ."
   },
-  "private": "true"
+  "author": "Chris Peters",
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "pug-cli": "0.0.0",
+    "stylus": "^0.54.5"
+  }
 }
