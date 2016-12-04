@@ -1,0 +1,28 @@
+@import "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|PT+Sans";
+
+$logo-width = 158
+$logo-height = 272
+$col-pink = #C9518A
+$col-green = #39B7C4
+$col-blue = #586086
+$col-bg = #2F3238
+$col-fg = #b5c0c7
+
+@import "header"
+@import "content"
+@import "footer"
+
+html
+  min-height: 100%
+
+  body
+    margin: 0
+    background-color: $col-bg
+    color: $col-fg
+    
+    a, a:visited
+      color: inherit
+      transition: all 0.2s
+      
+    a:hover
+      color: $col-green

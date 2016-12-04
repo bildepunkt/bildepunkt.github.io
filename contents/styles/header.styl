@@ -1,0 +1,73 @@
+
+header
+  //opacity: 0.2
+  text-align: center
+  position: relative
+  height: 100%
+  width: 100%
+
+  .hero
+    .logo
+      left: 50%
+      top: 50%
+      margin-top: -($logo-height)px
+      margin-left: -($logo-width / 2)px
+      position: absolute
+      animation: fade-down 1s
+
+      .logo-poly
+        transition: all 1s
+        cursor: pointer
+
+        &:hover
+          fill: white
+
+    .title
+      position: absolute
+      width: 100%
+      top: 50%
+      animation: fade-up 1s
+
+      h1
+        color: $col-green
+        font-family: "PT Sans"
+        letter-spacing: 0.1em
+        font-size: 56px
+        
+        a
+          transition all 1.6s
+          text-decoration: none
+
+          &:hover
+            color: $col-pink
+          
+      nav ul
+        list-style: none
+        padding: 0
+        
+        li
+          display: inline-block
+          margin: 0 16px
+          
+          a          
+            padding: 8px
+            cursor: pointer
+  
+            &:hover
+              color: $col-green
+
+@keyframes fade-down
+  0%
+    opacity: 0
+    transform: translate(0, -96px)
+  100%
+    opacity: 1
+    transform: translate(0, 0)
+              
+@keyframes fade-up
+  0%
+    opacity: 0
+    transform: translate(0, 96px)
+  100%
+    opacity: 1
+    transform: translate(0, 0)
