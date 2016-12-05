@@ -23,20 +23,20 @@ header
         &:hover, &.active
           fill: white
 
-        &.b
-          animation: slide-down 0.4s
         &.d
           animation: slide-down 0.8s
 
         &.a
-          animation: slide-up 0.4s
-        &.e
-          animation: slide-up 0.8s
+          animation: slide-right 0.4s
+        &.b
+          animation: slide-right 0.4s
 
+        &.e
+          animation: slide-left 0.8s
         &.c
           animation: slide-left 0.4s
         &.f
-          animation: slide-left 0.8s
+          animation: slide-left 1s
 
     .title
       position: absolute
@@ -84,15 +84,15 @@ header
   100%
     transform: translate(0, 0)
 
-@keyframes slide-up
-  0%
-    transform: translate(0, 96px)
-  100%
-    transform: translate(0, 0)
-
 @keyframes slide-left
   0%
     transform: translate(96px, 0)
+  100%
+    transform: translate(0, 0)
+
+@keyframes slide-right
+  0%
+    transform: translate(-128px, 0)
   100%
     transform: translate(0, 0)
 
