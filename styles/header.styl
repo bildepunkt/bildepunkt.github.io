@@ -14,12 +14,13 @@ header
       margin-left: -($logo-width / 2)px
       position: absolute
       animation: fade-down 1s
+      transition: all 1s
 
       .logo-poly
         transition: all 2s
         cursor: pointer
 
-        &:hover
+        &:hover, &.active
           fill: white
 
         &.b
@@ -53,7 +54,7 @@ header
           transition all 1.6s
           text-decoration: none
 
-          &:hover
+          &:hover, &.active
             color: $col-pink
 
       .description
@@ -74,7 +75,7 @@ header
             padding: 8px
             cursor: pointer
   
-            &:hover
+            &:hover, &.active
               color: $col-green
 
 @keyframes slide-down
@@ -110,3 +111,29 @@ header
   100%
     opacity: 1
     transform: translate(0, 0)
+
+@media (max-width: 358px)
+  header
+    .hero
+      .logo
+        margin-top: -($logo-height - 160)px
+
+      .title
+        h1
+          font-size: 48px
+
+        .description
+          font-size: 24px
+
+@media (max-height: 560px)
+  header
+    .hero
+      .logo
+        margin-top: -($logo-height - 248)px
+        top: 40%
+      .title
+        top: 40%
+
+        .description
+          margin: -44px 16px 0
+          font-size: 24px
