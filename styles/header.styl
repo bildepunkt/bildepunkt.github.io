@@ -1,20 +1,24 @@
+$poly-gather-time = 1
+$poly-gather-dist = 96
+
+$abs-container()
+  position: absolute
+  top: 0
+  left: 0
 
 header
-  //opacity: 0.2
   text-align: center
   position: relative
   height: 100%
   width: 100%
 
   canvas
-    position: absolute
-    top: 0
-    left: 0
+    $abs-container()
 
   .hero
     .logo
-      position: absolute
-      animation: fade-down 1s
+      $abs-container()
+      animation: slide-down 1s, fade-in 1.4s
       transition: all 1s
 
       path
@@ -24,26 +28,24 @@ header
         &:hover, &.active
           fill: white
 
-        &.d
-          animation: slide-down 0.8s
-
-        &.a
-          animation: slide-right 0.4s
-        &.b
-          animation: slide-right 0.4s
-
-        &.e
-          animation: slide-left 0.8s
-        &.c
-          animation: slide-left 0.4s
-        &.f
-          animation: slide-left 1s
+      path:nth-child(4)
+        animation: gather-down ($poly-gather-time)s
+      path:nth-child(1)
+        animation: gather-right ($poly-gather-time)s
+      path:nth-child(2)
+        animation: gather-right ($poly-gather-time)s
+      path:nth-child(5)
+        animation: gather-left ($poly-gather-time - 0.2)s
+      path:nth-child(3)
+        animation: gather-left ($poly-gather-time - 0.4)s
+      path:nth-child(6)
+        animation: gather-left ($poly-gather-time)s
 
     .title
       position: absolute
       width: 100%
       top: 50%
-      animation: fade-up 1s
+      animation: slide-up 1s, fade-in 1.4s
 
       h1
         color: $col-green
@@ -79,62 +81,26 @@ header
             &:hover, &.active
               color: $col-green
 
+@keyframes fade-in
+  0%
+    opacity: 0
+
+@keyframes gather-down
+  0%
+    transform: translate(0, -($poly-gather-dist)px)
+
+@keyframes gather-left
+  0%
+    transform: translate(($poly-gather-dist)px, 0)
+
+@keyframes gather-right
+  0%
+    transform: translate(-($poly-gather-dist)px, 0)
+
 @keyframes slide-down
   0%
-    transform: translate(0, -96px)
-  100%
-    transform: translate(0, 0)
-
-@keyframes slide-left
-  0%
-    transform: translate(96px, 0)
-  100%
-    transform: translate(0, 0)
-
-@keyframes slide-right
-  0%
-    transform: translate(-128px, 0)
-  100%
-    transform: translate(0, 0)
-
-@keyframes fade-down
-  0%
-    opacity: 0
-    transform: translate(0, -96px)
-  100%
-    opacity: 1
-    transform: translate(0, 0)
+    transform: translate(0, -($poly-gather-dist)px)
               
-@keyframes fade-up
+@keyframes slide-up
   0%
-    opacity: 0
-    transform: translate(0, 96px)
-  100%
-    opacity: 1
-    transform: translate(0, 0)
-
-@media (max-width: 358px)
-  header
-    .hero
-      .logo
-        margin-top: -($logo-height - 160)px
-
-      .title
-        h1
-          font-size: 48px
-
-        .description
-          font-size: 24px
-
-@media (max-height: 560px)
-  header
-    .hero
-      .logo
-        margin-top: -($logo-height - 248)px
-        top: 40%
-      .title
-        top: 40%
-
-        .description
-          margin: -44px 16px 0
-          font-size: 24px
+    transform: translate(0, ($poly-gather-dist)px)

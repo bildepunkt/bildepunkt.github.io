@@ -98,6 +98,16 @@
       this.context.restore();
     }
   }
+  
+  function windowResize () {
+    header.onResize();
+    about.onResize();
+    logo.onResize();
+  }
+
+  function windowScroll () {
+    bars.onScroll(window.scrollY);
+  }
 
   const winWidth = window.innerWidth;
   const winHeight = window.innerHeight;
@@ -107,21 +117,10 @@
   let header = new Section("header");
   let about = new Section("#about");
 
-  function onResize () {
-    header.onResize();
-    about.onResize();
-    logo.onResize();
-  }
+  windowResize();
 
-  onResize();
-
-  window.addEventListener("resize", ()=> {
-    onResize();
-  }, false);
-
-  window.addEventListener("scroll", ()=> {
-    bars.onScroll(window.scrollY);
-  }, false);
+  window.addEventListener("resize", windowResize, false);
+  window.addEventListener("scroll", windowScroll, false);
 
   const logCss = "background-color:#586086; color:#39B7C4;";
   const year = new Date().getFullYear();

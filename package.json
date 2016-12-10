@@ -7,7 +7,8 @@
     "watch-styles": "./node_modules/.bin/stylus -w styles/main.styl -o build/main.css",
     "watch-scripts": "./node_modules/.bin/babel -w scripts/main.js --out-file build/main.js --source-maps",
     "watch-templates": "./node_modules/.bin/jade -w templates/index.jade -o .",
-    "lint": "./node_modules/.bin/eslint ./scripts"
+    "lint": "./node_modules/.bin/eslint ./scripts",
+    "build": "npm run lint && ./node_modules/.bin/stylus styles/main.styl -o build/main.css && ./node_modules/.bin/babel scripts/main.js --out-file build/main.js && ./node_modules/.bin/jade templates/index.jade -o ."
   },
   "author": "Chris Peters",
   "private": true,
