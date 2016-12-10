@@ -3,18 +3,32 @@
   class Section {
     constructor (selector="section") {
       this.section = document.querySelector(selector);
-      window.addEventListener("resize", this.resize.bind(this), false);
-      this.resize();
     }
 
-    resize () {
+    onResize () {
       this.section.style.height = `${window.innerHeight}px`;
     }
   }
 
+  class Logo {
+    constructor (svgSelector="#svgLogo") {
+      this.svg = document.querySelector(svgSelector);
+      this.svgGroup = document.querySelector(`${svgSelector} g`);
+    }
+
+    onResize () {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      this.svg.setAttribute("width", w);
+      this.svg.setAttribute("height", h);
+      this.svgGroup.setAttribute("transform", `translate(${w / 2}, ${h / 2})`);
+    }
+  }
+
   class Bars {
-    constructor (c, w, h) {
-      this.canvas = c;
+    constructor (canvas, w, h) {
+      this.canvas = canvas;
       this.context = this.canvas.getContext("2d");
       this.width = w;
       this.height = h;
@@ -24,7 +38,7 @@
       this.canvas.width = this.width;
       this.canvas.height = this.height;
 
-      this.context.globalAlpha = 0.1;
+      this.context.globalAlpha = 0.08;
 
       const barTotal = Math.ceil((w + h) / this.barHeight);
 
@@ -37,9 +51,11 @@
 
         this.ends.push(end);
       }
+
+      this.onScroll();
     }
 
-    update (factor=0) {
+    onScroll (factor=0) {
       let colorIndex = 0;
       const halfWidth = this.width / 2;
       const halfHeight = this.height / 2;
@@ -57,9 +73,9 @@
         if (end <= halfWidth) {
           end += factor;
           this.context.fillRect(
-            end - this.width,
+            end - this.width * 4,
             i * this.barHeight,
-            this.width,
+            this.width * 4,
             this.barHeight
           );
         } else {
@@ -83,21 +99,32 @@
     }
   }
 
-  const year = new Date().getFullYear();
-  const logCss = "background-color:#586086; color:#39B7C4;";
   const winWidth = window.innerWidth;
   const winHeight = window.innerHeight;
   let headerCanvas = document.querySelector("#headerCanvas");
+  let logo = new Logo();
   let bars = new Bars(headerCanvas, winWidth, winHeight);
-  bars.update();
+  let header = new Section("header");
+  let about = new Section("#about");
 
-  new Section("header");
-  new Section("#about");
+  function onResize () {
+    header.onResize();
+    about.onResize();
+    logo.onResize();
+  }
 
-  window.addEventListener("scroll", ()=> {
-    bars.update(window.scrollY);
+  onResize();
+
+  window.addEventListener("resize", ()=> {
+    onResize();
   }, false);
 
+  window.addEventListener("scroll", ()=> {
+    bars.onScroll(window.scrollY);
+  }, false);
+
+  const logCss = "background-color:#586086; color:#39B7C4;";
+  const year = new Date().getFullYear();
   console.log(`%c oh, hai! \n © ${year} BILDEPUNKT.COM | ALL RIGHTS RESERVED `, logCss);
 
 }).call(this);
