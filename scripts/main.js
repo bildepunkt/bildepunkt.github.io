@@ -60,7 +60,6 @@
     }
 
     onScroll (factor=0) {
-      console.log("Bars#onScroll");
       let colorIndex = 0;
       const halfWidth = this.canvas.width / 2;
       const halfHeight = this.canvas.height / 2;
@@ -105,15 +104,15 @@
     }
   }
   
-  class Resizr {
-    constructor (callback) {
+  class DelayCallback {
+    constructor (callback, buffer=256) {
       this.callback = callback;
       this.timeoutId = null;
-      this.buffer = 256;
+      this.buffer = buffer;
       this.canCall = false;
     }
 
-    size () {
+    call () {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(this.callback, this.buffer);
     }
@@ -132,20 +131,20 @@
     bars.onScroll();
   }
 
-  let resizr = new Resizr(windowResize);
+  let delayCallback = new DelayCallback(windowResize);
   let logo = new Logo();
   let bars = new Bars();
   let header = new Section("header");
   let about = new Section("#about");
-  let resizrResize = resizr.size.bind(resizr);
+  let delayCall = delayCallback.call.bind(delayCallback);
 
   windowResize();
 
-  window.addEventListener("resize", resizrResize, false);
-  window.addEventListener("orientationchange", resizrResize, false);
+  window.addEventListener("resize", delayCall, false);
+  window.addEventListener("orientationchange", delayCall, false);
   window.addEventListener("scroll", windowScroll, false);
 
-  const logCss = "background-color:#586086; color:#39B7C4;";
+  const logCss = "background-color:#586086; color:#39B7C4; font-size:16px";
   const year = new Date().getFullYear();
   console.log(`%c oh, hai! \n © ${year} BILDEPUNKT.COM | ALL RIGHTS RESERVED `, logCss);
 
