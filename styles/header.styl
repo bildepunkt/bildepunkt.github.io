@@ -1,5 +1,6 @@
 $poly-gather-time = 1
 $poly-gather-dist = 96
+$logo-height = 264
 
 $abs-container()
   position: absolute
@@ -18,7 +19,7 @@ header
   .hero
     .logo
       $abs-container()
-      animation: slide-down 1s, fade-in 1.4s
+      animation: slide-up 1s, fade-in 1.4s
       transition: all 1s
 
       path
@@ -45,7 +46,7 @@ header
       position: absolute
       width: 100%
       top: 50%
-      animation: slide-up 1s, fade-in 1.4s
+      animation: slide-down 1s, fade-in 1.4s
 
       h1
         color: $col-green
@@ -99,8 +100,8 @@ header
 
 @keyframes slide-down
   0%
-    transform: translate(0, -($poly-gather-dist)px)
+    transform: translate(0, -128px)
               
 @keyframes slide-up
   0%
-    transform: translate(0, ($poly-gather-dist)px)
+    transform: translate(0, 256px)
