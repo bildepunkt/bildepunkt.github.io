@@ -19,34 +19,33 @@
     onResize () {
       const w = window.innerWidth;
       const h = window.innerHeight;
+      const offsetY = h < 360 ? 264 / 2 : 0;
 
       this.svg.setAttribute("width", w);
       this.svg.setAttribute("height", h);
-      this.svgGroup.setAttribute("transform", `translate(${w / 2}, ${h / 2})`);
+      this.svgGroup.setAttribute("transform", `translate(${w / 2}, ${h / 2 + offsetY})`);
     }
   }
 
   class Bars {
-    constructor (canvas, w, h) {
-      this.canvas = canvas;
+    constructor (selector="#headerCanvas") {
+      this.canvas = document.querySelector(selector);
       this.context = this.canvas.getContext("2d");
-      this.width = w;
-      this.height = h;
       this.colors = ["#C9518A", "#39B7C4", "#586086"];
       this.barHeight = 128;
       this.ends = [];
-      this.canvas.width = this.width;
-      this.canvas.height = this.height;
 
-      this.context.globalAlpha = 0.08;
+      this.onResize();
 
-      const barTotal = Math.ceil((w + h) / this.barHeight);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const barTotal = Math.ceil((width + height) / this.barHeight);
 
       for (let i = 0; i < barTotal; i++) {
-        let end = Math.random() * (w / 2);
+        let end = Math.random() * (width / 2);
 
         if (i === 0 || i % 2 === 0) {
-          end += (w / 2);
+          end += (width / 2);
         }
 
         this.ends.push(end);
@@ -55,16 +54,23 @@
       this.onScroll();
     }
 
-    onScroll (factor=0) {
-      let colorIndex = 0;
-      const halfWidth = this.width / 2;
-      const halfHeight = this.height / 2;
+    onResize () {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
 
-      this.context.clearRect(0, 0, this.width, this.height);
+    onScroll (factor=0) {
+      console.log("Bars#onScroll");
+      let colorIndex = 0;
+      const halfWidth = this.canvas.width / 2;
+      const halfHeight = this.canvas.height / 2;
+
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.context.save();
+      this.context.globalAlpha = 0.08;
       this.context.translate(halfWidth, halfHeight);
       this.context.rotate(-45 * Math.PI / 180);
-      this.context.translate(-halfWidth, -this.height);
+      this.context.translate(-halfWidth, -this.canvas.height);
 
       for (let i = 0; i < this.ends.length; i++) {
         let end = this.ends[i];
@@ -73,9 +79,9 @@
         if (end <= halfWidth) {
           end += factor;
           this.context.fillRect(
-            end - this.width * 4,
+            end - this.canvas.width * 4,
             i * this.barHeight,
-            this.width * 4,
+            this.canvas.width * 4,
             this.barHeight
           );
         } else {
@@ -83,7 +89,7 @@
           this.context.fillRect(
             end,
             i * this.barHeight,
-            end + this.width,
+            end + this.canvas.width * 4,
             this.barHeight
           );
         }
@@ -99,27 +105,44 @@
     }
   }
   
-  function windowResize () {
-    header.onResize();
-    about.onResize();
-    logo.onResize();
+  class Resizr {
+    constructor (callback) {
+      this.callback = callback;
+      this.timeoutId = null;
+      this.buffer = 256;
+      this.canCall = false;
+    }
+
+    size () {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(this.callback, this.buffer);
+    }
   }
 
   function windowScroll () {
     bars.onScroll(window.scrollY);
   }
 
-  const winWidth = window.innerWidth;
-  const winHeight = window.innerHeight;
-  let headerCanvas = document.querySelector("#headerCanvas");
+  function windowResize () {
+    header.onResize();
+    about.onResize();
+    logo.onResize();
+    
+    bars.onResize();
+    bars.onScroll();
+  }
+
+  let resizr = new Resizr(windowResize);
   let logo = new Logo();
-  let bars = new Bars(headerCanvas, winWidth, winHeight);
+  let bars = new Bars();
   let header = new Section("header");
   let about = new Section("#about");
+  let resizrResize = resizr.size.bind(resizr);
 
   windowResize();
 
-  window.addEventListener("resize", windowResize, false);
+  window.addEventListener("resize", resizrResize, false);
+  window.addEventListener("orientationchange", resizrResize, false);
   window.addEventListener("scroll", windowScroll, false);
 
   const logCss = "background-color:#586086; color:#39B7C4;";
