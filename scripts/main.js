@@ -131,17 +131,17 @@
     bars.onScroll();
   }
 
-  let delayCallback = new DelayCallback(windowResize);
+  let resizeDelay = new DelayCallback(windowResize);
   let logo = new Logo();
   let bars = new Bars();
   let header = new Section("header");
   let about = new Section("#about");
-  let delayCall = delayCallback.call.bind(delayCallback);
+  let delayResize = resizeDelay.call.bind(resizeDelay);
 
   windowResize();
 
-  window.addEventListener("resize", delayCall, false);
-  window.addEventListener("orientationchange", delayCall, false);
+  window.addEventListener("resize", delayResize, false);
+  window.addEventListener("orientationchange", delayResize, false);
   window.addEventListener("scroll", windowScroll, false);
 
   const logCss = "background-color:#586086; color:#39B7C4; font-size:16px";
