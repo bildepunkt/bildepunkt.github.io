@@ -4,11 +4,12 @@
   "description": "The development & design portfolio of Chris Peters",
   "main": "index.html",
   "scripts": {
-    "watch-styles": "./node_modules/.bin/stylus -w styles/main.styl -o build/main.css --sourcemap",
-    "watch-scripts": "./node_modules/.bin/babel -w scripts/main.js --out-file build/main.js --source-maps",
-    "watch-templates": "./node_modules/.bin/jade -w templates/index.jade -o . --pretty",
-    "lint": "./node_modules/.bin/eslint ./scripts",
-    "build": "npm run lint && ./node_modules/.bin/stylus styles/main.styl -o build/main.css --compress && ./node_modules/.bin/babel scripts/main.js --out-file build/main.js && ./node_modules/.bin/jade templates/index.jade -o ."
+    "watch-styles": "./node_modules/.bin/stylus -w src/styles/main.styl -o build/main.css --sourcemap",
+    "watch-scripts": "./node_modules/.bin/babel -w src/scripts/main.js --out-file build/main.js --source-maps",
+    "watch-templates": "./node_modules/.bin/jade -w src/templates/index.jade -o . --pretty",
+    "lint": "./node_modules/.bin/eslint ./src/scripts",
+    "build": "npm run lint && ./node_modules/.bin/stylus src/styles/main.styl -o build/main.css --compress && ./node_modules/.bin/babel src/scripts/main.js --out-file build/main.js && ./node_modules/.bin/jade src/templates/index.jade -o .",
+    "serve": "python -m SimpleHTTPServer 2048"
   },
   "author": "Chris Peters",
   "private": true,

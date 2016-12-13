@@ -1,10 +1,11 @@
 {
   "locals": {
-    "url": "http://localhost:8080/blog/",
-    "name": "The Wintersmith's blog",
-    "owner": "Someone",
-    "description": "Ramblings of an immor(t)al demigod"
+    "url": "http://bildepunkt.com",
+    "name": "bildepunkt",
+    "owner": "bildepunkt",
+    "description": "A microcosm of geekery"
   },
+  "baseUrl": "/blog/",
   "plugins": [
     "./plugins/paginator.coffee"
   ],
