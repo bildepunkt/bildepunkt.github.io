@@ -1,5 +1,19 @@
-doctype html
+mixin logo(svgId, svgWidth, svgHeight, transform)
+  - var pink = "#C9518A"
+  - var green = "#39B7C4"
+  - var blue = "#586086"
+  svg(id=svgId, width=svgWidth, height=svgHeight, version="1.1", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink")
+    g(transform=transform)
+      path(d="M-76,25.259 L-43.462,44.068 L-43.462,93.818 L-76,112.525 L-76,25.259 z" fill=blue)
+      path(d="M-76,-113.688 L-43.462,-132.667 L-43.462,-45.401 L-76,-25.498 L-76,-113.688 z" fill=green)
+      path(d="M-76,25.259 L44.492,-44.181 L77,-25.498 L-43.462,44.068 z" fill=green)
+      path(d="M-43.462,-94.914 L-43.462,-132.667 L76.901,-63.008 L77,-25.498 L-43.462,-94.914 z" fill=pink)
+      path(d="M-76,112.525 L44.492,43.085 L77,61.768 L-43.462,131.333 z" fill=pink)
+      path(d="M-76,-25.498 L-43.462,-45.401 L76.902,24.257 L77,61.768 L-76,-25.498 z" fill=blue)
+
 - var title = "bildepunkt"
+
+doctype html
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -14,6 +28,7 @@ html(lang="en")
     link(rel="stylesheet", href="build/main.css")
   body
     include ./header.jade
+    include ./nav.jade
     include ./about.jade
     include ./footer.jade
     script(src="build/main.js")

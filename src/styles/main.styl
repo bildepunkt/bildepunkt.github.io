@@ -1,12 +1,33 @@
+/**
+ * globals
+ */
 $col-pink = #C9518A
 $col-green = #39B7C4
 $col-blue = #586086
 $col-bg = #2F3238
 $col-fg = #b5c0c7
+$font-sans = "PT Sans", sans-serif
 
+/**
+ * mixins
+ */
+$pathHover()
+  transition: all 2s
+  cursor: pointer
+
+  &:hover, &.active
+    fill: white
+
+/**
+ * imports
+ */
+@import "nav"
 @import "header"
 @import "footer"
 
+/**
+ * general
+ */
 html
   min-height: 100%
   ::selection

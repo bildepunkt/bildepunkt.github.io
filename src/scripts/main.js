@@ -1,29 +1,56 @@
 (()=> {
 
-  class Section {
-    constructor (selector="section") {
-      this.section = document.querySelector(selector);
+  class Nav {
+    constructor (selector="#nav") {
+      this.el = document.querySelector(selector);
+      this.logo = document.querySelector(`${selector} .navLogo`);
+      this.lastScrollY = window.scrollY;
     }
 
-    onResize () {
-      this.section.style.height = `${window.innerHeight}px`;
+    onScroll (scrollY) {
+      if (scrollY < this.lastScrollY) {
+        this.el.classList.add("visible");
+      } else {
+        this.el.classList.remove("visible");
+      }
+
+      if (scrollY === 0) {
+        this.el.classList.add("at-top");
+      } else {
+        this.el.classList.remove("at-top");
+      }
+
+      if (scrollY < window.innerHeight / 2) {
+        this.logo.classList.remove("visible");
+      } else {
+        this.logo.classList.add("visible");
+      }
+
+      this.lastScrollY = scrollY;
+    }
+  }
+
+  class Section {
+    constructor (selector="section") {
+      this.el = document.querySelector(selector);
+    }
+
+    onResize (height) {
+      this.el.style.height = `${height}px`;
     }
   }
 
   class Logo {
-    constructor (svgSelector="#svgLogo") {
+    constructor (svgSelector="#svgLogo", height=264) {
       this.svg = document.querySelector(svgSelector);
       this.svgGroup = document.querySelector(`${svgSelector} g`);
+      this.height = height;
     }
 
-    onResize () {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const offsetY = h < 360 ? 264 / 2 : 0;
-
-      this.svg.setAttribute("width", w);
-      this.svg.setAttribute("height", h);
-      this.svgGroup.setAttribute("transform", `translate(${w / 2}, ${h / 2 + offsetY})`);
+    onResize (width, height) {
+      this.svg.setAttribute("width", width);
+      this.svg.setAttribute("height", height);
+      this.svgGroup.setAttribute("transform", `translate(${width / 2}, ${height / 2 - this.height / 2})`);
     }
   }
 
@@ -54,9 +81,9 @@
       this.onScroll();
     }
 
-    onResize () {
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
+    onResize (width, height) {
+      this.canvas.width = width;
+      this.canvas.height = height;
     }
 
     onScroll (factor=0) {
@@ -119,15 +146,21 @@
   }
 
   function windowScroll () {
-    bars.onScroll(window.scrollY);
+    const scrollY = window.scrollY;
+    
+    bars.onScroll(scrollY);
+    nav.onScroll(scrollY);
   }
 
   function windowResize () {
-    header.onResize();
-    about.onResize();
-    logo.onResize();
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    header.onResize(height);
+    about.onResize(height);
+    logo.onResize(width, height);
     
-    bars.onResize();
+    bars.onResize(width, height);
     bars.onScroll();
   }
 
@@ -136,6 +169,7 @@
   let bars = new Bars();
   let header = new Section("header");
   let about = new Section("#about");
+  let nav = new Nav();
   let delayResize = resizeDelay.call.bind(resizeDelay);
 
   windowResize();

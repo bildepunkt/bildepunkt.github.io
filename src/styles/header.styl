@@ -23,11 +23,7 @@ header
       transition: all 1s
 
       path
-        transition: all 2s
-        cursor: pointer
-
-        &:hover, &.active
-          fill: white
+        $pathHover()
 
       path:nth-child(4)
         animation: gather-down ($poly-gather-time)s
@@ -50,7 +46,7 @@ header
 
       h1
         color: $col-green
-        font-family: "PT Sans"
+        font-family: $font-sans
         letter-spacing: 0.1em
         font-size: 64px
 
