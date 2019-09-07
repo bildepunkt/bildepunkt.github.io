@@ -1,14 +1,14 @@
 $poly-gather-time = 1
 $poly-gather-dist = 96
 
-header 
+header
   text-align: center
 
   @media (max-height: ($media-breakpoint-height)px)
     .hero
       .logo
         margin-bottom: -($logo-height / 2)px
-    
+
       .title
         opacity: 0
 
@@ -49,7 +49,6 @@ header
       h1
         animation: title-slide-down 1s, fade-in 1.4s
         color: $col-green
-        font-family: "PT Sans"
         font-size: 64px
         letter-spacing: 0.1em
 
@@ -60,26 +59,23 @@ header
           &:hover, &.active
             color: $col-pink
 
-      .description
-        animation: description-slide-down 1.1s, fade-in 1.4s
-        font-size: 32px
-        font-family: "Lora"
-        font-style: italic
-        margin: -42px 0 0
-        white-space: nowrap
-          
+      .links
+        animation: links-slide-down 1.1s, fade-in 1.4s
+        font-size: 42px
+        margin: -24px 0 0
+
       nav ul
         list-style: none
         padding: 0
-        
+
         li
           display: inline-block
           margin: 0 16px
-          
+
           a          
             cursor: pointer
             padding: 8px
-  
+
             &:hover, &.active
               color: $col-green
 
@@ -103,7 +99,7 @@ header
   0%
     transform: translate(0, -128px)
 
-@keyframes description-slide-down
+@keyframes links-slide-down
   0%
     transform: translate(0, -196px)
               
