@@ -7,7 +7,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _classCallCheck(this, Logger);
 
     var logCss = "background-color:#586086; color:#39B7C4; font-size:16px";
-    console.log("%c oh, hai! \n \xA9 " + year + " BILDEPUNKT.COM | ALL RIGHTS RESERVED ", logCss);
+    console.log("%c\n-/oo/-'                                    \n':+ssssoooo+:.                             \n+sssssssoooooooo/-'                        \nosssssssooooooooooo+:.                     \nosssssssooooooooooooooo/-'                 \nosssssss-'./oooooooooooooo+:.              \nosssssss-    .:+ooooooooooooo+/-'          \nosssssss-       '-/oooooooooooooo+-.       \nosssssss-           .:+ooooooooooooo+.     \nosssssss-              '-/ooooooooooo:     \nosssssso:'                 ./oooooooo-     \nossso++////-.            .:ossssooooo-     \n+o+///////////:.'    '-/ossssssssssso-     \n'.:///////////////-:ossssssssssssso:.      \n    '-//////////////++ossssssss+:'         \n      '.://///////////++ooo/-              \n      '-/ooo++/////////////:.              \n    .:+sssssssso++/////////////:-'         \n'-/osssssssssssss+:-///////////////-.      \n/+osssssssssso/-'    '.://///////////-     \n///++ossss+:.            .-//////////-     \n///////+:'                 ./o++/////-     \n////////.              '-/ooooooo++//-     \n////////.           .:+ooooooooooooo+.     \n////////.       '-/oooooooooooooo/-'       \n////////.    .:+ooooooooooooo+:.           \n////////.'-/oooooooooooooo/-'              \n//////+++ooooooooooooo+:.                  \n//+++oooooooooooooo/-'                     \n:oooooooooooooo+:-                         \n'-/oooooooo+:'                             \n    .:+o:-'                                \n                                           \n\xA9 " + year + " BILDEPUNKT.COM | ALL RIGHTS RESERVED", logCss);
   };
 
   var Footer = function Footer(year) {
@@ -20,3 +20,5 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   new Logger(year);
   new Footer(year);
 }).call(undefined);
+
+//# sourceMappingURL=main.js.map
