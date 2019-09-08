@@ -1,10 +1,8 @@
 $poly-gather-time = 1
 $poly-gather-dist = 96
 
-header
-  text-align: center
-
-  @media screen and (max-height: ($media-breakpoint-height)px), screen and (max-width: 400px)
+@media screen and (max-height: ($media-breakpoint-height)px), screen and (max-width: 400px)
+   header 
     .hero
       .logo
         margin-bottom: -($logo-height / 2)px
@@ -17,13 +15,18 @@ header
         div.links
           margin: -60px 0 0
 
-  @media screen and (max-width: 400px)
+@media screen and (max-width: 400px)
+  header
     .hero
       .title
         div.links
-          margin: -166px 0 0
+          margin: -190px 0 0
           a
             display: block
+            margin: 12px 0
+
+header
+  text-align: center
 
   .hero
     .logo

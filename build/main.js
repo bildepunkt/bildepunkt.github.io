@@ -20,5 +20,3 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   new Logger(year);
   new Footer(year);
 }).call(undefined);
-
-//# sourceMappingURL=main.js.map
