@@ -1,7 +1,7 @@
 (()=> {
   class Logger {
     constructor (year) {
-      const logCss = "background-color:#586086; color:#39B7C4; font-size:16px";
+      const logCss = "color:#c9518a; font-size:12px";
       console.log(`%c
 -/oo/-'                                    
 ':+ssssoooo+:.                             
