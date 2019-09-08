@@ -4,13 +4,26 @@ $poly-gather-dist = 96
 header
   text-align: center
 
-  @media (max-height: ($media-breakpoint-height)px)
+  @media screen and (max-height: ($media-breakpoint-height)px), screen and (max-width: 400px)
     .hero
       .logo
         margin-bottom: -($logo-height / 2)px
+        opacity: 0.2
 
       .title
-        opacity: 0
+        h1
+          display: none
+
+        div.links
+          margin: -60px 0 0
+
+  @media screen and (max-width: 400px)
+    .hero
+      .title
+        div.links
+          margin: -166px 0 0
+          a
+            display: block
 
   .hero
     .logo
@@ -43,7 +56,7 @@ header
     .title
       position: absolute
       top: 50%
-      transition: all 2s
+      transition: opacity 1s
       width: 100%
 
       h1
@@ -52,32 +65,19 @@ header
         font-size: 64px
         letter-spacing: 0.1em
 
-        a
-          transition all 1.6s
-          text-decoration: none
-
-          &:hover, &.active
-            color: $col-pink
-
       .links
         animation: links-slide-down 1.1s, fade-in 1.4s
         font-size: 42px
-        margin: -24px 0 0
+        line-height: 42px
+        margin: -26px 0 0
 
-      nav ul
-        list-style: none
-        padding: 0
-
-        li
+        a
           display: inline-block
-          margin: 0 16px
+          margin: 0 12px
+          padding: 12px 2px
 
-          a          
-            cursor: pointer
-            padding: 8px
-
-            &:hover, &.active
-              color: $col-green
+          i.stacked-icon
+            color: $col-bg
 
 @keyframes fade-in
   0%

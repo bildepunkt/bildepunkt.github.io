@@ -13,7 +13,7 @@ $media-breakpoint-height = 640
 html
   min-height: 100%
   ::selection
-    background: $col-pink
+    background: $col-green
 
   body
     margin: 0
@@ -23,7 +23,10 @@ html
 
     a, a:visited
       color: inherit
-      transition: all 0.2s
+      cursor: pointer
+      text-decoration: none
+      transition: color 0.2s, transform 0.2s
 
-    a:hover
-      color: $col-green
+      &:hover, &.active
+        color: $col-pink
+        transform: scale(1.1)

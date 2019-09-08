@@ -1,5 +1,6 @@
 - var logoWidth = 153
 - var logoHeight = 264
+- var email = "bildepunkt@gmail.com"
 
 header
   .hero
@@ -15,8 +16,18 @@ header
 
     .title
       h1
-        a(href="#") #{title}
+        a(href="#?oh=hai") #{title}
 
       .links
-        a
-          i.fab.fa-github
+        a(href="//github.com/bildepunkt" title="code")
+          span.fa-stack.fa-1x
+            i.fas.fa-circle.fa-stack-2x
+            i.fas.fa-code-branch.fa-stack-1x.stacked-icon
+        a(href="mailto:" + email + "?subject=from: bildepunkt.com" title=email)
+          span.fa-stack.fa-1x
+            i.fas.fa-circle.fa-stack-2x
+            i.fas.fa-envelope.fa-stack-1x.stacked-icon
+        a(href="//www.instagram.com/bildepunkt/" title="instagram")
+          span.fa-stack.fa-1x
+            i.fas.fa-circle.fa-stack-2x
+            i.fab.fa-instagram.fa-stack-1x.stacked-icon
